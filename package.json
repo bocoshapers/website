@@ -1,0 +1,19 @@
+{
+  "name": "bocoshapers-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack:dev": "./node_modules/.bin/webpack --env.dev",
+    "webpack:watch": "./node_modules/.bin/webpack --env.dev --watch",
+    "webpack:prod": "./node_modules/.bin/webpack --env.prod -p"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "html-webpack-plugin": "^2.28.0",
+    "ts-loader": "^2.0.1",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
+  }
+}
