@@ -1,0 +1,82 @@
+
+
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background-color: #fafbfd;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-style: normal;
+}
+
+h1, h2, h3, h4, h5, h6, hr {
+    color: #646464
+}
+p {
+    color: #777;
+}
+
+.bocoshapers {
+    text-align: center;
+
+}
+
+.bocoshapers__splash {
+    position: relative;
+    background: url('flatirons.thumb.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 25em;
+    width: 100%;
+}
+
+.bocoshapers__logo {
+    max-width: 26em;
+    margin: 0 auto;
+}
+
+.bocoshapers__logo img {
+    width: 100%;
+    transform: translate3d(0,0,0);
+}
+
+.bocoshapers__content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: -4em;
+}
+
+.content__card {
+    background-color: #fff;
+    width: 66%;
+    margin: 0 auto;
+    border-radius: 5px;
+    border: 1px solid #777;
+    padding: 1.5em;    
+}
+
+.bocoshapers__footer {
+    background-color: #005ea4;
+    padding: 2em 0;    
+}
+
+.bocoshapers__footer h1, h3 {
+    color: #fff;
+}
+
+.shaper__team {
+    display: flex;
+    flex-direction: column;
+}
+
+.shaper__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.shaper__profile {
+    /*width: 49%;*/
+    border: 4px solid black;
+}
+
