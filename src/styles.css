@@ -95,3 +95,6 @@ p {
   object-fit: cover;
 }
 
+.hide__elm {
+  display: none;
+}

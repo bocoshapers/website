@@ -2,6 +2,7 @@
 
 import './styles.css';
 import {Shapers, Shaper} from "./data";
+import {ShaperProfile} from "./shaper-profile";
 
 
 document.addEventListener('DOMContentLoaded', run);
@@ -13,7 +14,8 @@ function run(event: Event) {
   shaperRows.forEach((row) => {
     let currentRow = shaperTeamDiv.appendChild(createShaperRowDiv());
     row.forEach((shaper: Shaper) => {
-      currentRow.appendChild(createShaperProfileDiv(shaper))
+      let Profile = new ShaperProfile(shaper);
+      currentRow.appendChild(Profile.createProfileDiv());
     });
   });
 }
@@ -32,28 +34,6 @@ function createShaperRowDiv() {
   return shaperRow;
 }
 
-function createShaperProfileDiv(shaper: Shaper) {
-  let div = document.createElement('div');
-  div.className = 'shaper__profile';
-
-  let {first, imageFile} = shaper;
-
-  let h4 = document.createElement('h4');
-  h4.textContent = first;
-
-  let shaperPicDiv = document.createElement('div');
-  let img = document.createElement('img');
-
-  shaperPicDiv.className = 'shaper__pic';
-  img.src = imageFile;
-  shaperPicDiv.appendChild(img);
-
-  for (let child of [shaperPicDiv, h4]) {
-    div.appendChild(child);
-  }
-
-  return div;
-}
 
 function shuffle<T>(array: T[]) {
   let currentIndex = array.length,
