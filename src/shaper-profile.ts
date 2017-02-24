@@ -27,6 +27,37 @@ export class ShaperProfile implements Profile{
     this.profileFront.classList.toggle('hide__elm');
   }
 
+  getProfileElm() {
+    let template = `
+          <div class="shaper__profile">
+            <div class="profile__front" id="profile__front">
+              <div class="shaper__pic">
+                <img src="${this.imageFile}"/>
+              </div>
+              <h4>${this.first} ${this.last}</h4>
+            </div>
+
+            <div class="profile__back" id="profile__back">
+            <h1>${this.first} ${this.last}</h1>
+              <div class="shaper__pic">
+                <img src="${this.imageFile}"/>
+              </div>
+              <div class="shaper__bio"><p>${this.bio}</p></div>
+            </div>
+          </div>`;
+
+    let parent = document.createElement('div');
+    parent.innerHTML = template;
+    var nodeList = Array.prototype.slice.call(parent.childNodes[0].childNodes);
+
+    for (let node of nodeList) {
+      if (node.nodeName === 'DIV') {
+        console.log('hey now!', node.classList);
+      }
+    }
+    return parent;
+  }
+
   createProfileDiv() {
     let div = document.createElement('div');
     div.className = 'shaper__profile';
@@ -76,7 +107,7 @@ export class ShaperProfile implements Profile{
     this.profileFront = front;
     this.profileBack = back;
     console.log('hmm', this.profileBack);
-    this._attachListener(div, 'click', (e:any) => this.toggleCard(e));
+    this._attachListener(div, 'click', this.toggleCard.bind(this));
     return div;
   }
 

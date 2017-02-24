@@ -15,7 +15,8 @@ function run(event: Event) {
     let currentRow = shaperTeamDiv.appendChild(createShaperRowDiv());
     row.forEach((shaper: Shaper) => {
       let Profile = new ShaperProfile(shaper);
-      currentRow.appendChild(Profile.createProfileDiv());
+      console.log(Profile.getProfileElm().childNodes);
+      currentRow.appendChild(Profile.getProfileElm());
     });
   });
 }
