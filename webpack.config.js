@@ -19,7 +19,23 @@ module.exports = env => {
     devtool: env.prod ? 'source-map' : 'eval',
     module: {
       loaders: [
-        {test: /.ts$/, loader: 'ts-loader', exclude: /node_modules/}
+        {
+          test: /.ts$/,
+          loader: 'ts-loader',
+          exclude: /node_modules/
+        },
+        {
+          test: /\.css$/,
+          use: [ 'style-loader', 'css-loader' ]
+        },
+        {
+          test: /\.png$/,
+          use: { loader: 'url-loader', options: { limit: 100000 } },
+        },
+        {
+          test: /\.jpg$/,
+          use: [ 'file-loader' ]
+        }
       ]
     },
     plugins: [
@@ -40,10 +56,6 @@ module.exports = env => {
           except: ['$super', '$', 'exports', 'require']
         },
         sourceMap: true
-      }) : undefined,
-      env.prod ? new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        minChunks: module => /node_modules/.test(module.resource)
       }) : undefined
     ].filter(p => !!p)
   };
