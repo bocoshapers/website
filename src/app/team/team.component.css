@@ -1,0 +1,61 @@
+.shaper__team {
+  display: flex;
+  flex-direction: column;
+}
+
+.shaper__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 2em 0;
+}
+
+
+.shaper__modal {
+  position: fixed;
+  border-radius: 5px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  pointer-events: none;
+  opacity: 0;
+
+  will-change: transform, opacity;
+  -webkit-transform: scale(1.15);
+  transform: scale(1.15);
+
+  -webkit-transition:
+    -webkit-transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+  transition:
+    transform 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.1s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.shaper__modal.visible {
+  pointer-events: auto;
+  opacity: 1;
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  background: rgba(0, 94, 153,0.9);
+
+  -webkit-transition:
+    -webkit-transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+
+  transition:
+    transform 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946),
+    opacity 0.3s cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+.modal__content {
+  background: white;
+  padding: 2em;
+  width: 67%
+}

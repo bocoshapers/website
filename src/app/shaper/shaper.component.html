@@ -1,0 +1,20 @@
+<div class="shaper__profile">
+
+  <div *ngIf="!detail">
+    <div class="shaper__pic">
+      <img [src]="shaper.imageFile"/>
+    </div>
+    <h4>{{shaper.first}}</h4>
+  </div>
+
+  <div *ngIf="detail === true" class="shaper__detail">
+    <div class="shaper__pic">
+      <img [src]="shaper.imageFile"/>
+    </div>
+    <h4>{{shaper.first}} {{shaper.last}}</h4>
+    <div class="shaper__bio">
+      <p>{{shaper.bio}}</p>
+    </div>
+  </div>
+
+</div>

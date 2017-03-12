@@ -1,0 +1,14 @@
+
+<div class="shaper__modal" [ngClass]="{ 'visible': selectedShaper != null }" (click)="selectShaper(null)">
+  <div class="modal__content">
+
+    <boco-shaper *ngIf="selectedShaper" [shaper]="selectedShaper" [detail]="true"></boco-shaper>
+  </div>
+</div>
+
+<div class="shaper__team">
+  <div *ngFor="let row of shapers" class="shaper__row">
+    <boco-shaper (click)="selectShaper(member)" *ngFor="let member of row" [shaper]="member"></boco-shaper>
+  </div>
+</div>
+
