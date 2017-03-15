@@ -1,7 +1,10 @@
 .shaper__login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 3em;
-  padding: 3em;
+  margin: 0.5em;
+  padding: 0.5em;
+  text-align: center;
+}
+
+.shaper__login md-card {
+  margin: 0 auto;
+  max-width: 350px;
 }
