@@ -1,0 +1,7 @@
+.shaper__login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3em;
+  padding: 3em;
+}
