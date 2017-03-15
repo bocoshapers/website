@@ -32,6 +32,10 @@ npm-debug.log
 testem.log
 /typings
 
+#firebase
+src/environments/firebase.ts
+
+
 # e2e
 /e2e/*.js
 /e2e/*.map

@@ -97,3 +97,6 @@ Matt currently works in the eCommerce department for Eco-Products, a Boulder-bas
     bio: ''
   }
 ];
+
+
+// console.log('shapers hah', JSON.stringify(Shapers));

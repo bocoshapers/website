@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
-import {Shapers, Shaper, shuffle} from './team.data';
+import { Shaper } from './team.data';
+import {AngularFire, FirebaseListObservable} from "angularfire2";
+
 @Injectable()
 export class TeamService {
-  private _shapers: Shaper[][] = [];
-  constructor() {
-    shuffle(Shapers);
-    while (Shapers.length) {
-      this._shapers.push([Shapers.pop(), Shapers.pop()])
-    }
+  private $shapers: FirebaseListObservable<Shaper[]>;
+
+  constructor(af: AngularFire) {
+    this.$shapers = af.database.list('/shapers');
   }
 
   get shapers() {
-    return this._shapers;
+    return this.$shapers;
   }
 
 }
