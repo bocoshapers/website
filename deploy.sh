@@ -1,4 +1,5 @@
 #!/bin/bash
-
+commit_message="$1"
 ng build --prod --aot --base-href "http://bocoshapers.com/"
-ngh --message $1
+cp CNAME dist/
+ngh --message "$commit_message"
