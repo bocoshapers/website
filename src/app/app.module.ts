@@ -8,14 +8,13 @@ import { AppComponent } from './app.component';
 import { TeamComponent } from './team/team.component';
 import { TeamService } from "./team/team.service";
 import { ModalComponent } from './modal/modal.component';
-import { UserModule } from "./user/user.module";
+import { UserModule } from "./auth/user/user.module";
 import { AppRoutesModule } from "./app.routes";
 import { LandingComponent } from './landing/landing.component';
 import { SharedModule } from "./shared/shared.module";
-import {AuthService} from "./auth.service";
-import {UserService} from "./user.service";
-
-
+import { AuthService } from "./auth/auth.service";
+import { UserService } from "./auth/user.service";
+import { AuthModule } from "./auth/auth.module";
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -34,8 +33,9 @@ const firebaseAuthConfig = {
     HttpModule,
     AngularFireModule.initializeApp(FIREBASE_CONF, firebaseAuthConfig),
     AppRoutesModule,
+    AuthModule,
     UserModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     TeamService,

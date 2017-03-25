@@ -1,0 +1,21 @@
+
+.user {
+  margin: 0 5em;
+  padding: 0 10em;
+}
+
+@media only screen
+and (min-device-width: 320px)
+and (max-device-width: 480px)
+and (-webkit-min-device-pixel-ratio: 2) {
+  .user {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+
+
+
+

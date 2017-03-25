@@ -12,8 +12,8 @@ const USER_ROUTES: Routes = [
     path: '',
     canActivate: [UserGuardService],
     children: [
-      {path: '', component: UsersComponent},
-      {path: 'users/:id', component: UserComponent}
+      { path: '', component: UsersComponent },
+      { path: 'users/:id', component: UserComponent }
     ]
   }
 ];

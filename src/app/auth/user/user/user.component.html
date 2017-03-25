@@ -1,0 +1,49 @@
+
+<div *ngIf="user" class="user">
+
+  <md-card *ngIf="!editingProfile">
+    <md-card-title>My Account</md-card-title>
+    <md-card-subtitle>{{user.first}} {{user.last}}</md-card-subtitle>
+
+    <img md-card-image [src]="user.imageFile"/>
+
+    <md-card-content>
+      {{user.bio}}
+    </md-card-content>
+
+    <md-card-actions>
+      <button md-button (click)="editProfile()">edit profile</button>
+    </md-card-actions>
+  </md-card>
+
+  <md-card *ngIf="editingProfile">
+
+    <md-card-content>
+
+      <div>
+        <h5>Upload new profile pic</h5>
+        <input id="profPic" type="file" (change)="onFileSelect($event)"/>
+      </div>
+      <br>
+
+      <md-input-container>
+        <input mdInput placeholder="First Name" [(ngModel)]="user.first" />
+      </md-input-container>
+
+
+      <md-input-container>
+        <input mdInput placeholder="Last Name" [(ngModel)]="user.last" />
+      </md-input-container>
+      <md-input-container>
+        <textarea mdInput cols="100" rows="5" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+      </md-input-container>
+
+
+      <md-card-actions>
+        <button md-button (click)="save(user)">save</button>
+        <button md-button (click)="editingProfile = false">cancel</button>
+      </md-card-actions>
+    </md-card-content>
+  </md-card>
+
+</div>
