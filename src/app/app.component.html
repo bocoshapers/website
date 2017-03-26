@@ -1,11 +1,2 @@
-<!--<md-toolbar *ngIf="currentUser">-->
-  <!--<span class="nav__profile">-->
-    <!--<img [src]="currentUser.imageFile"/>-->
-  <!--</span>-->
-  <!--<span class="example-spacer"></span>-->
-  <!--<span><a md-button [routerLink]="'/'">Home</a></span>-->
-  <!--<span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>-->
-  <!--<span (click)="logout()"><a md-button>logout</a></span>-->
-<!--</md-toolbar>-->
-<router-outlet></router-outlet>
-
+<router-outlet name="auth"></router-outlet>
+<router-outlet class="md-boco-theme"></router-outlet>

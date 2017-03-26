@@ -7,7 +7,6 @@ import { FIREBASE_CONF } from "../environments/firebase";
 import { AppComponent } from './app.component';
 import { TeamComponent } from './team/team.component';
 import { TeamService } from "./team/team.service";
-import { ModalComponent } from './modal/modal.component';
 import { UserModule } from "./auth/user/user.module";
 import { AppRoutesModule } from "./app.routes";
 import { LandingComponent } from './landing/landing.component';
@@ -25,7 +24,6 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     TeamComponent,
-    ModalComponent,
     LandingComponent
   ],
   imports: [

@@ -1,7 +1,24 @@
 
-.user {
-  margin: 0 5em;
-  padding: 0 10em;
+
+.user__wrapper {
+  padding: 1.5em;
+}
+
+.user__profile {
+  display: flex;
+  flex-direction: row;
+}
+
+.user__profile div {
+  padding: 0.5em;
+}
+
+.user__info {
+  flex: 2;
+}
+
+.profile__pic {
+  flex: 1;
 }
 
 @media only screen

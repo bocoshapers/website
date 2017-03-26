@@ -1,22 +1,23 @@
 import {NgModule} from '@angular/core';
-import {SharedRoutes} from "./shared.routes";
 import {ShaperComponent} from "./shaper/shaper.component";
 import {CommonModule} from "@angular/common";
 import {MaterialModule} from "@angular/material";
+import {ModalComponent} from "./modal/modal.component";
 
 @NgModule({
   imports: [
     CommonModule,
-    SharedRoutes,
     MaterialModule
   ],
   exports: [
     ShaperComponent,
+    ModalComponent,
     CommonModule,
     MaterialModule
   ],
   declarations: [
-    ShaperComponent
+    ShaperComponent,
+    ModalComponent
   ]
 })
 export class SharedModule {}

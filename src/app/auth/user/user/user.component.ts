@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {UserService} from "../../user.service";
-import {ActivatedRoute, Params} from "@angular/router";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 import {AuthService} from "../../auth.service";
 import {Shaper} from "../../../team/team.data";
@@ -16,13 +16,15 @@ export class UserComponent implements OnInit {
   constructor(
     public auth: AuthService,
     private userService: UserService,
+    private router: Router,
     private route: ActivatedRoute) {}
 
   ngOnInit() {
+    this.router.navigate([{ outlets: { auth: ['auth'] }}]);
     this.route.params
       .switchMap((params: Params) => this.userService.getShaper(params['id']))
       .subscribe((shaper) => {
-        this.user = shaper
+        this.user = shaper;
       });
   }
 
