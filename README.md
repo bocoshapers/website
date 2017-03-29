@@ -1,4 +1,3 @@
 # NgBoco
 
-https://bocoshapers.github.io/website/
-
+http://bocoshapers.com
