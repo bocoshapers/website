@@ -3,6 +3,7 @@ import {AngularFire} from "angularfire2";
 import * as firebase from 'firebase';
 import {AuthService} from "./auth.service";
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/filter';
 import {Observable} from "rxjs";
 
 @Injectable()
@@ -11,12 +12,8 @@ export class UserService {
 
   getCurrentUser() {
     return this.auth.getAuth
-      .switchMap((auth) => {
-        if (auth != null) {
-          return this.getShaper(auth.uid);
-        }
-        return Observable.of(null);
-      });
+      .filter(auth => auth != null)
+      .switchMap((auth) => this.getShaper(auth.uid));
   }
 
   getShaper(uuid: string) {

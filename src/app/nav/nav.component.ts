@@ -43,6 +43,7 @@ export class NavComponent implements OnInit {
 
   logout() {
     this.auth.logout()
+      .then(() => this.currentUser = null)
       .then(() => this.router.navigate(['/']));
   }
 
