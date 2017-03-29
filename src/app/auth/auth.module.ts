@@ -4,7 +4,6 @@ import { LoginComponent } from "./login/login.component";
 import { AuthRoutes } from "./auth.routes";
 import { FormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
-import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   imports: [
@@ -13,6 +12,8 @@ import { AuthComponent } from './auth/auth.component';
     AuthRoutes,
     SharedModule
   ],
-  declarations: [LoginComponent, AuthComponent]
+  declarations: [
+    LoginComponent
+  ]
 })
 export class AuthModule { }

@@ -25,7 +25,8 @@ export class UserService {
 
   updateShaper(shaper) {
     return this.auth.getAuth
-      .switchMap((auth) => this._updateShaper(auth.uid, shaper));
+      .switchMap((auth) => this._updateShaper(auth.uid, shaper))
+      .catch((err: any) => Observable.of(err));
   }
 
   private _updateShaper(uid, shaper) {

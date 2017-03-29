@@ -1,17 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Router} from "@angular/router";
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.css']
 })
-export class LandingComponent implements OnInit {
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
-    this.router.navigate([{ outlets: { auth: ['auth'] }}]);
-  }
-
-}
+export class LandingComponent { }

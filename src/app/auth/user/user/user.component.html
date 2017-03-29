@@ -64,12 +64,10 @@
           <div class="profile__pic">
             <md-card>
               <img md-card-image [src]="user.imageFile"/>
-              <md-card-actions>
+              <md-card-content>
                 <input id="profPic" type="file" (change)="onFileSelect($event)"/>
-              </md-card-actions>
-              <md-card-footer>
                 <h5>Upload new profile pic</h5>
-              </md-card-footer>
+              </md-card-content>
             </md-card>
           </div>
         </div>

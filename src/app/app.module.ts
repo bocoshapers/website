@@ -11,9 +11,10 @@ import { UserModule } from "./auth/user/user.module";
 import { AppRoutesModule } from "./app.routes";
 import { LandingComponent } from './landing/landing.component';
 import { SharedModule } from "./shared/shared.module";
-import { AuthService } from "./auth/auth.service";
-import { UserService } from "./auth/user.service";
+import { AuthService } from "./services/auth.service";
+import { UserService } from "./services/user.service";
 import { AuthModule } from "./auth/auth.module";
+import { NavComponent } from './nav/nav.component';
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -24,7 +25,8 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     TeamComponent,
-    LandingComponent
+    LandingComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,

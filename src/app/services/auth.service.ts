@@ -17,6 +17,6 @@ export class AuthService {
   }
 
   logout() {
-    return this.af.auth.logout();
+    return this.getAuth.logout();
   }
 }
