@@ -1,0 +1,79 @@
+/* For use in src/lib/core/theming/_palette.scss */
+
+@import '~@angular/material/core/theming/all-theme';
+@include mat-core();
+
+/* For use in src/lib/core/theming/_palette.scss */
+$md-bocopallette: (
+  50 : #e0ecf4,
+  100 : #b3cfe4,
+  200 : #80afd2,
+  300 : #4d8ebf,
+  400 : #2676b2,
+  500 : #005ea4,
+  600 : #00569c,
+  700 : #004c92,
+  800 : #004289,
+  900 : #003178,
+  A100 : #a6c3ff,
+  A200 : #73a0ff,
+  A400 : #407eff,
+  A700 : #266cff,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #ffffff,
+    500 : #ffffff,
+    600 : #ffffff,
+    700 : #ffffff,
+    800 : #ffffff,
+    900 : #ffffff,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #ffffff,
+    A700 : #ffffff,
+  )
+);
+
+$md-bocoaccent: (
+  50 : #fff8e1,
+  100 : #ffecb5,
+  200 : #ffe083,
+  300 : #ffd451,
+  400 : #ffca2c,
+  500 : #ffc107,
+  600 : #ffbb06,
+  700 : #ffb305,
+  800 : #ffab04,
+  900 : #ff9e02,
+  A100 : #ffffff,
+  A200 : #fffaf2,
+  A400 : #ffe4bf,
+  A700 : #ffd9a6,
+  contrast: (
+    50 : #000000,
+    100 : #000000,
+    200 : #000000,
+    300 : #000000,
+    400 : #000000,
+    500 : #000000,
+    600 : #000000,
+    700 : #000000,
+    800 : #000000,
+    900 : #000000,
+    A100 : #000000,
+    A200 : #000000,
+    A400 : #000000,
+    A700 : #000000,
+  )
+);
+
+$md-boco-primary: mat-palette($md-bocopallette);
+$md-boco-accent: mat-palette($md-bocoaccent);
+$md-boco-theme: mat-light-theme($md-boco-primary, $md-boco-accent);
+
+.md-boco-theme {
+  @include angular-material-theme($md-boco-theme);
+}

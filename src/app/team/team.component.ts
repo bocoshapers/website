@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TeamService } from "./team.service";
-import {Shaper, shuffle} from "./team.data";
-import { Observable } from "rxjs";
+import { Shaper } from "./team.data";
 import 'rxjs/add/operator/map';
 
 @Component({

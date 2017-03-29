@@ -1,0 +1,84 @@
+
+<div class="user">
+
+  <div class="user__wrapper" *ngIf="user">
+    <md-card>
+      <md-toolbar color="primary">My Profile
+        <button md-button (click)="editProfile()">edit profile</button>
+      </md-toolbar>
+      <div class="user__profile">
+
+      <div class="user__info">
+        <md-card>
+          <md-card-title>My Account</md-card-title>
+          <md-card-subtitle>{{user.first}} {{user.last}}</md-card-subtitle>
+          <md-card-content>
+            {{user.bio}}
+          </md-card-content>
+
+          <!--<md-card-actions>-->
+            <!--<button md-button (click)="editProfile()">edit profile</button>-->
+          <!--</md-card-actions>-->
+        </md-card>
+      </div>
+
+      <div class="profile__pic">
+        <md-card>
+          <img md-card-image [src]="user.imageFile"/>
+          <md-card-footer>
+            <h4>Profile Pic</h4>
+          </md-card-footer>
+        </md-card>
+      </div>
+      </div>
+
+    </md-card>
+
+    <boco-modal [trigger]="editingProfile">
+      <md-card>
+        <div class="user__profile">
+
+          <div class="user__info">
+            <md-card>
+              <md-card-title>My Account</md-card-title>
+
+
+              <md-card-subtitle>
+                <md-input-container>
+                  <input mdInput placeholder="First Name" [(ngModel)]="user.first" />
+                </md-input-container>
+
+
+                <md-input-container>
+                  <input mdInput placeholder="Last Name" [(ngModel)]="user.last" />
+                </md-input-container>
+              </md-card-subtitle>
+              <md-card-content>
+                <md-input-container>
+                  <textarea mdInput cols="100" rows="5" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+                </md-input-container>
+              </md-card-content>
+            </md-card>
+          </div>
+
+          <div class="profile__pic">
+            <md-card>
+              <img md-card-image [src]="user.imageFile"/>
+              <md-card-content>
+                <input id="profPic" type="file" (change)="onFileSelect($event)"/>
+                <h5>Upload new profile pic</h5>
+              </md-card-content>
+            </md-card>
+          </div>
+        </div>
+
+        <md-card-actions>
+          <button md-button (click)="save(user)">save</button>
+          <button md-button (click)="editingProfile = false">cancel</button>
+        </md-card-actions>
+      </md-card>
+    </boco-modal>
+
+  </div>
+
+</div>

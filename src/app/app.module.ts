@@ -7,15 +7,14 @@ import { FIREBASE_CONF } from "../environments/firebase";
 import { AppComponent } from './app.component';
 import { TeamComponent } from './team/team.component';
 import { TeamService } from "./team/team.service";
-import { ModalComponent } from './modal/modal.component';
-import { UserModule } from "./user/user.module";
+import { UserModule } from "./auth/user/user.module";
 import { AppRoutesModule } from "./app.routes";
 import { LandingComponent } from './landing/landing.component';
 import { SharedModule } from "./shared/shared.module";
-import {AuthService} from "./auth.service";
-import {UserService} from "./user.service";
-
-
+import { AuthService } from "./services/auth.service";
+import { UserService } from "./services/user.service";
+import { AuthModule } from "./auth/auth.module";
+import { NavComponent } from './nav/nav.component';
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -26,16 +25,17 @@ const firebaseAuthConfig = {
   declarations: [
     AppComponent,
     TeamComponent,
-    ModalComponent,
-    LandingComponent
+    LandingComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
     AngularFireModule.initializeApp(FIREBASE_CONF, firebaseAuthConfig),
     AppRoutesModule,
+    AuthModule,
     UserModule,
-    SharedModule,
+    SharedModule
   ],
   providers: [
     TeamService,

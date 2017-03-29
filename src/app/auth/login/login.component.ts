@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {Router} from "@angular/router";
-import {AuthService} from "../../auth.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'boco-login',
@@ -17,22 +17,22 @@ export class LoginComponent implements OnInit{
   }
 
   ngOnInit() {
-    console.log('login init');
-    this.auth.getAuth()
-      .subscribe((auth) => {
+    this.auth.getAuth
+      .subscribe(auth => {
         if (auth != null) {
-          this.router.navigate(['/users', auth.uid]);
+          this._goToUser(auth.uid);
         }
-      })
+      });
   }
 
   login() {
     this.auth.login(this.email, this.password)
       .then((auth) => {
-      this.router.navigate(['/users', auth.uid]);
+        this._goToUser(auth.uid);
       });
   }
 
-
-
+  private _goToUser(id) {
+    this.router.navigate(['/users', id]);
+  }
 }

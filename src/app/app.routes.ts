@@ -7,8 +7,7 @@ import {LandingComponent} from "./landing/landing.component";
 
 const APP_ROUTES = [
   { path: '', component: LandingComponent },
-  { path: 'login', loadChildren: 'app/shared/shared.module#SharedModule' },
-  { path: 'users', loadChildren: 'app/user/user.module#UserModule' }
+  { path: 'login', loadChildren: 'app/auth/auth.module#AuthModule' },
 ];
 
 @NgModule({
