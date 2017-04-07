@@ -15,6 +15,7 @@ import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { AuthModule } from "./auth/auth.module";
 import { NavComponent } from './nav/nav.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -30,6 +31,7 @@ const firebaseAuthConfig = {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpModule,
     AngularFireModule.initializeApp(FIREBASE_CONF, firebaseAuthConfig),
     AppRoutesModule,
