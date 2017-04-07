@@ -7,7 +7,7 @@ import { FIREBASE_CONF } from "../environments/firebase";
 import { AppComponent } from './app.component';
 import { TeamComponent } from './team/team.component';
 import { TeamService } from "./team/team.service";
-import { UserModule } from "./auth/user/user.module";
+import { UserModule } from "./user/user.module";
 import { AppRoutesModule } from "./app.routes";
 import { LandingComponent } from './landing/landing.component';
 import { SharedModule } from "./shared/shared.module";
