@@ -12,7 +12,7 @@ p {
 
 .bocoshapers__splash {
   position: relative;
-  background: url('../../assets/images/flatirons.thumb.jpg') no-repeat center center fixed;
+  background: url('../../../assets/images/flatirons.thumb.jpg') no-repeat center center fixed;
   background-size: cover;
   height: 25em;
   /*width: 100%;*/

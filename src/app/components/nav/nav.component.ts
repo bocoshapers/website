@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../services/user.service";
-import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
+import {UserService} from "../../services/user.service";
+import {AuthService} from "../../services/auth.service";
 
 @Component({
   selector: 'boco-nav',
@@ -13,6 +13,7 @@ import {Router} from "@angular/router";
       <span class="example-spacer"></span>
       <span><a md-button [routerLink]="'/'">Home</a></span>
       <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
+      <span><a md-button [routerLink]="['/events/admin']">Events Dashboard</a></span>
       <span (click)="logout()"><a md-button>logout</a></span>
     </md-toolbar>
   `,

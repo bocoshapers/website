@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Shaper} from "../../team/team.data";
+import {Shaper} from "../../components/team/team.data";
 
 @Component({
   selector: 'boco-shaper',

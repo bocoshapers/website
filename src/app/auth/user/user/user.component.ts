@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../services/user.service";
+import {UserService} from "../../services/user.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
-import {AuthService} from "../../../services/auth.service";
-import {Shaper} from "../../../team/team.data";
+import {AuthService} from "../../services/auth.service";
+import {Shaper} from "../../components/team/team.data";
 
 @Component({
   selector: 'boco-user',
