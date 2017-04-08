@@ -5,7 +5,7 @@ import { UserComponent } from './user/user.component';
 import { UserRoutesModule } from "./user.routes";
 import { UserGuardService } from "./user-guard.service";
 import { FormsModule } from "@angular/forms";
-import { SharedModule } from "../../shared/shared.module";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
   imports: [

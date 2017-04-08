@@ -39,8 +39,14 @@ export class LoginComponent implements OnInit{
     let snackBarRef = this.bocoSnackbar.openFromComponent(BocoSnackbar, {
       duration: 3500
     });
+    let errorMessage;
     //sometimes the error message is a string or an object with a message prop.
-    snackBarRef.instance.message = e.message || e;
+    if (e.message) {
+      errorMessage = e.message
+    } else {
+      errorMessage = e;
+    }
+    snackBarRef.instance.message = errorMessage;
   }
 
   private _goToUser(id) {

@@ -4,7 +4,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
 import {AuthService} from "../../services/auth.service";
-import {Shaper} from "../../components/team/team.data";
+import {Shaper} from "../../team/team.data";
 
 @Component({
   selector: 'boco-user',
