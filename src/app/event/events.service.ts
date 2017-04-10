@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {AngularFire, FirebaseListObservable} from "angularfire2";
 import {UpdateEvent} from "./event-editor/event-editor.component";
 import {UploadService} from "../services/upload.service";
-import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
+import filter from 'ramda/src/filter'
 
 export interface SEvent {
   $key?: string
@@ -47,26 +47,18 @@ export class EventsService {
 
   getEvent($key) {
     return this.$events
-      .map((events) => events.filter(e => e.$key === $key));
+      .map((events) => filter(e => e.$key === $key, events));
   }
 
   getEventBySlug(slug: string) {
-    return this.af.database.list('/events', {
-      query: {
-        orderByChild: 'slug',
-        equalTo: slug,
-        limitToFirst: 1
-      }
-    });
+    return this.$events
+      .map(events => filter(e => e.slug = slug, events));
   }
 
+
   publishedEvents() {
-    return this.af.database.list('/events', {
-      query: {
-        orderByChild: 'published',
-        equalTo: true
-      }
-    });
+    return this.$events
+      .map(events => filter(e => e.published === true, events));
   }
 
   addEvent(event: TempEvent) {

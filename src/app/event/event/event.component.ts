@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {EventsService, SEvent} from "../events.service";
 import {ActivatedRoute, Params} from "@angular/router";
-import {FirebaseListObservable} from "angularfire2";
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'boco-event',
@@ -23,7 +23,7 @@ import 'rxjs/add/operator/map';
   `
 })
 export class EventComponent implements OnInit {
-  public $shaperEvent: FirebaseListObservable<SEvent[]>;
+  public $shaperEvent: Observable<SEvent[]>;
   constructor(
     private route: ActivatedRoute,
     private eventsService: EventsService) { }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {EventsService, SEvent} from "../events.service";
-import {FirebaseListObservable} from "angularfire2";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-events',
@@ -21,7 +21,7 @@ import {FirebaseListObservable} from "angularfire2";
   `
 })
 export class EventsComponent implements OnInit {
-  public $publishedEvents: FirebaseListObservable<SEvent[]>;
+  public $publishedEvents: Observable<SEvent[]>;
   constructor(public eventsService: EventsService) { }
 
   ngOnInit() {
