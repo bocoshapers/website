@@ -5,17 +5,19 @@ import { AngularFireModule, AuthProviders, AuthMethods } from "angularfire2";
 import { FIREBASE_CONF } from "../environments/firebase";
 
 import { AppComponent } from './app.component';
-import { TeamComponent } from './team/team.component';
-import { TeamService } from "./team/team.service";
+import { TeamComponent } from './components/team/team.component';
+import { TeamService } from "./components/team/team.service";
 import { UserModule } from "./user/user.module";
 import { AppRoutesModule } from "./app.routes";
-import { LandingComponent } from './landing/landing.component';
+import { LandingComponent } from './components/landing/landing.component';
 import { SharedModule } from "./shared/shared.module";
 import { AuthService } from "./services/auth.service";
 import { UserService } from "./services/user.service";
 import { AuthModule } from "./auth/auth.module";
-import { NavComponent } from './nav/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {EventModule} from "./event/event.module";
+import {UploadService} from "./services/upload.service";
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
@@ -37,11 +39,13 @@ const firebaseAuthConfig = {
     AppRoutesModule,
     AuthModule,
     UserModule,
-    SharedModule
+    SharedModule,
+    EventModule
   ],
   providers: [
     TeamService,
     AuthService,
+    UploadService,
     UserService
   ],
   bootstrap: [AppComponent]

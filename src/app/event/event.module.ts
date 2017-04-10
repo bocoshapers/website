@@ -6,8 +6,10 @@ import {EventRoutes} from "./event.routes";
 import { AdminEventsComponent } from './admin-events/admin-events.component';
 import {SharedModule} from "../shared/shared.module";
 import {EventsService} from "./events.service";
-import { EventEditorComponent } from './event-editor/event-editor.component';
+import {EventEditorComponent, SlugifyPipe} from './event-editor/event-editor.component';
 import {FormsModule} from "@angular/forms";
+import { EventDetailComponent } from './event-detail/event-detail.component';
+import { EventEditComponent } from './event-edit/event-edit.component';
 
 @NgModule({
   imports: [
@@ -20,7 +22,10 @@ import {FormsModule} from "@angular/forms";
     EventComponent,
     EventsComponent,
     AdminEventsComponent,
-    EventEditorComponent
+    EventEditorComponent,
+    SlugifyPipe,
+    EventDetailComponent,
+    EventEditComponent
   ],
   providers: [
     EventsService

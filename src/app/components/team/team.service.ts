@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Shaper } from './team.data';
 import {AngularFire, FirebaseListObservable} from "angularfire2";
+
+export interface Shaper {
+  first: string
+  last: string
+  imageFile: string
+  bio: string
+}
 
 @Injectable()
 export class TeamService {

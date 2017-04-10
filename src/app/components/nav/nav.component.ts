@@ -10,10 +10,10 @@ import {AuthService} from "../../services/auth.service";
       <span class="nav__profile">
         <img [src]="currentUser.imageFile"/>
       </span>
-      <span class="example-spacer"></span>
+      <span class="boco-spacer"></span>
       <span><a md-button [routerLink]="'/'">Home</a></span>
       <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
-      <span><a md-button [routerLink]="['/events/admin']">Events Dashboard</a></span>
+      <span><a md-button [routerLink]="'/events/admin'">Events Dashboard</a></span>
       <span (click)="logout()"><a md-button>logout</a></span>
     </md-toolbar>
   `,
@@ -21,10 +21,6 @@ import {AuthService} from "../../services/auth.service";
     `.nav__profile img {
       width: 25px;
       border-radius: 50%;
-    }
-
-    .example-spacer {
-      flex: 1 1 auto;
     }
     `
   ]

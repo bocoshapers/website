@@ -77,3 +77,11 @@ $md-boco-theme: mat-light-theme($md-boco-primary, $md-boco-accent);
 .md-boco-theme {
   @include angular-material-theme($md-boco-theme);
 }
+
+.mat-tooltip {
+  background: mat-color($mat-grey, 700, 0.9);
+}
+
+.boco-spacer {
+  flex: 1 1 auto;
+}
