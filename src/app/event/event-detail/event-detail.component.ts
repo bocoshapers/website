@@ -21,7 +21,7 @@ import {SEvent} from "../events.service";
         <md-toolbar class="event__details" color="primary">
           <md-toolbar-row>
             <div class="boco-spacer">
-              <h5><i>when: </i>{{datetime | date:'medium' }}</h5>
+              <h5><i>when: </i>{{eventDate | date:'medium'}}</h5>
             </div>
             <div class="boco-spacer">
               <h5 class="boco-spacer"><i>where: </i>{{location}}</h5>
@@ -34,7 +34,7 @@ import {SEvent} from "../events.service";
                 md-button
                 target="_blank"
                 rel="noopener noreferrer"
-                [href]="smLinks[smLink]">{{smLink}}</a>
+                [href]="smLinks[smLink]">{{smLink}}<md-icon>open_in_new</md-icon></a>
             </div>
           </md-toolbar-row>
 
@@ -55,7 +55,7 @@ import {SEvent} from "../events.service";
           </md-toolbar-row>
           <md-toolbar-row>
             <div class="boco-spacer">
-              <h5><i>when: </i>{{datetime | date:'medium' }}</h5>
+              <h5><i>when: </i>{{ eventDate | date:'short' }}</h5>
             </div>
             <div class="boco-spacer">
               <h5 class="boco-spacer"><i>where: </i>{{location}}</h5>
@@ -92,7 +92,7 @@ export class EventDetailComponent {
     return this.shaperEvent.photo;
   }
 
-  get datetime() {
+  get eventDate() {
     return this.shaperEvent.datetime;
   }
 

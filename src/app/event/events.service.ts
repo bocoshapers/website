@@ -12,7 +12,7 @@ export interface SEvent {
   slug: string
   name: string
   description: string
-  datetime: Date
+  datetime: string;
   location: string
   published: boolean
   smLinks: SocialMediaLink
@@ -23,7 +23,7 @@ export interface TempEvent {
   slug?: string
   name?: string
   description?: string
-  datetime?: Date
+  datetime?: string;
   location?: string
   published?: boolean
   smLinks?: SocialMediaLink
@@ -33,6 +33,10 @@ export interface SocialMediaLink {
   facebook: string
   twitter: string
   eventBrite: string
+}
+
+export function parseDate(dateStr: string) {
+  return dateStr.replace('T',' ').replace('-','/');
 }
 
 @Injectable()

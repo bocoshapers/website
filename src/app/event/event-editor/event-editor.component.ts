@@ -7,11 +7,12 @@ import {
   Pipe,
   PipeTransform
 } from '@angular/core';
-import {TempEvent} from "../events.service";
+import {parseDate, TempEvent} from "../events.service";
 import clone from 'ramda/src/clone';
 import compose from 'ramda/src/compose';
 import join from 'ramda/src/join';
 import split from 'ramda/src/split';
+import pickAll from 'ramda/src/pickAll';
 
 export interface UpdateEvent {
   $key?: string
@@ -80,7 +81,7 @@ export function deSlugify(slug: string): string {
       </md-toolbar>
       <div fxLayout="row">
         <div fxFlex="{{preview ? '66' : '100'}}">
-          <form #eventForm="ngForm" (ngSubmit)="onSave(_event)">
+          <form #eventForm="ngForm">
             <md-card>
               <md-card-content>
                 
@@ -100,7 +101,9 @@ export function deSlugify(slug: string): string {
                     </div>
 
                     <div>
-                      <label for="eventDate">Date / Time</label>
+                      <label for="eventDate">
+                        Date / Time {{_event.datetime | date:'medium' }}
+                      </label>
                       <input
                         id="eventDate"
                         required
@@ -251,6 +254,7 @@ export function deSlugify(slug: string): string {
               </md-card-content>
               <md-card-actions>
                 <button type="submit" md-button
+                        (click)="onSave(_event)"
                         [disabled]="!eventForm.form.valid || !_event?.photo">save event</button>
                 <ng-container *ngIf="preview">
                   <button md-button (click)="onCancel()">cancel</button>
@@ -295,6 +299,7 @@ export class EventEditorComponent implements OnChanges {
     if (this.slug) {
       event.slug = slugify(this.slug);
     }
+    event.datetime = parseDate(event.datetime);
     if (this.event.$key) {
       this.save.emit({$key: this.event.$key, event})
     } else {
@@ -308,7 +313,18 @@ export class EventEditorComponent implements OnChanges {
       if (src.slug) {
         this.slug = deSlugify(src.slug);
       }
-      this._event = clone(src);
+      let keys = [
+        'photo',
+        'slug',
+        'name',
+        'description',
+        'location',
+        'datetime',
+        'published',
+        'smLinks'
+      ];
+      let validKeys = pickAll(keys);
+      this._event = clone(validKeys(src));
     }
   }
 

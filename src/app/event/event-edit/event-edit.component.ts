@@ -61,7 +61,7 @@ export class EventEditComponent implements OnInit, OnDestroy {
 
   private _updateEvent(update) {
     this.eventsService.updateEvent(update)
-      .then(se => {})
+      .then(snapshot => snapshot)
       .catch(e => console.log('update error', e))
   }
 
