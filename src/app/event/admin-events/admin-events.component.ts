@@ -28,8 +28,6 @@ import {UpdateEvent} from "../event-editor/event-editor.component";
           +
         </button> 
       </div>
-     
-      <a [routerLink]="'/events'" md-button>Events page</a>
       
       <boco-modal [trigger]="newEvent != null">
         <boco-event-editor
@@ -42,7 +40,8 @@ import {UpdateEvent} from "../event-editor/event-editor.component";
       </boco-modal>
 
       <md-list>
-        <h3 md-subheader>Events</h3>
+        <h3 md-subheader><a [routerLink]="'/events'" md-button>Events page</a></h3>
+
         <md-list-item *ngFor="let event of $events | async" >
           <h5 md-line>{{event.name}}</h5>
           <h3 md-line>{{event.date | date:'yMMDjm' }}</h3>

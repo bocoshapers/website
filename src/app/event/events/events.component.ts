@@ -3,20 +3,26 @@ import {EventsService, SEvent} from "../events.service";
 import {Observable} from "rxjs";
 
 @Component({
-  selector: 'app-events',
-  styles: [``],
+  selector: 'boco-events',
+  styles: [`
+    .events {
+      margin: 3em;
+      padding: 3em;
+    }
+  `],
   template: `
-    <md-toolbar>
-      <h5>Events</h5>
+    <md-toolbar color="primary">
+      <h5>Boulder Global Shaper Events</h5>
     </md-toolbar>
     <div>
-      <md-card *ngFor="let event of $publishedEvents | async">
-        <md-card-title>
-          <h5>{{event.name}}</h5>
-          
-          <a [routerLink]="['/events', event.slug]">go to event page</a>
-        </md-card-title>
-      </md-card>
+      <div *ngFor="let event of $publishedEvents | async" class="events">
+        
+        <boco-event-detail
+          [shaperEvent]="event"
+          [preview]="true">
+        </boco-event-detail>
+        
+      </div>
     </div>
   `
 })

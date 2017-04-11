@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EventsService, SEvent} from "../events.service";
 import {ActivatedRoute, Params} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
@@ -16,24 +16,27 @@ import {Observable} from "rxjs";
   `],
   template: `
     <div class="event">
-      <div class="event__section" *ngFor="let se of $shaperEvent | async">
-        <boco-event-detail [shaperEvent]="se"></boco-event-detail>
+      <div class="event__section" *ngIf="$shaperEvent">
+        <boco-event-detail [shaperEvent]="$shaperEvent"></boco-event-detail>
       </div>
     </div>
   `
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, OnDestroy {
   public $shaperEvent: Observable<SEvent[]>;
+  private $sub;
   constructor(
     private route: ActivatedRoute,
     private eventsService: EventsService) { }
 
   ngOnInit() {
-    this.route.params
-      .map((params: Params) => {
-        this.$shaperEvent = this.eventsService.getEventBySlug(params['slug']);
-      })
+    this.$sub = this.route.params
+      .switchMap((params: Params) => this.eventsService.getEventBySlug(params['slug']))
+      .map((event) => this.$shaperEvent = event)
       .subscribe();
   }
 
+  ngOnDestroy() {
+    this.$sub.unsubscribe();
+  }
 }

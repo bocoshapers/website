@@ -4,6 +4,7 @@ import {UpdateEvent} from "./event-editor/event-editor.component";
 import {UploadService} from "../services/upload.service";
 import 'rxjs/add/operator/map';
 import filter from 'ramda/src/filter'
+import head from 'ramda/src/head';
 
 export interface SEvent {
   $key?: string
@@ -47,12 +48,12 @@ export class EventsService {
 
   getEvent($key) {
     return this.$events
-      .map((events) => filter(e => e.$key === $key, events));
+      .map((events) => head(filter(e => e.$key === $key, events)));
   }
 
   getEventBySlug(slug: string) {
     return this.$events
-      .map(events => filter(e => e.slug = slug, events));
+      .map(events => head(filter(e => e.slug = slug, events)));
   }
 
 
