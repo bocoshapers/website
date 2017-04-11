@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import {AngularFire} from "angularfire2";
-import * as firebase from 'firebase';
 import {AuthService} from "./auth.service";
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import {Observable} from "rxjs";
+import {UploadService} from "./upload.service";
 
 @Injectable()
 export class UserService {
-  constructor(private af: AngularFire, private auth: AuthService) { }
+  constructor(
+    private af: AngularFire,
+    private uploadService: UploadService,
+    private auth: AuthService) { }
 
   getCurrentUser() {
     return this.auth.getAuth
@@ -31,7 +34,7 @@ export class UserService {
   }
 
 
-  uploadProfileImage(uuid: string, imageFile) {
-    return firebase.storage().ref(`/assets/images/${uuid}/${imageFile.name}`).put(imageFile);
+  uploadProfileImage(key: string, imageFile) {
+    return this.uploadService.uploadImage(key, imageFile);
   }
 }

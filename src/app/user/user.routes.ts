@@ -2,7 +2,7 @@ import {NgModule} from "@angular/core";
 import {RouterModule, Routes} from "@angular/router";
 import {UsersComponent} from "./users/users.component";
 import {UserComponent} from "./user/user.component";
-import {UserGuardService} from "./user-guard.service";
+import {UserGuardService} from "../services/user-guard.service";
 /**
  * Created by githop on 3/13/17.
  */
@@ -13,7 +13,7 @@ const USER_ROUTES: Routes = [
     canActivate: [UserGuardService],
     children: [
       { path: '', component: UsersComponent },
-      { path: 'users/:id', component: UserComponent }
+      { path: ':id', component: UserComponent }
     ]
   }
 ];

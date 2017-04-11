@@ -1,6 +1,6 @@
 /* For use in src/lib/core/theming/_palette.scss */
 
-@import '~@angular/material/core/theming/all-theme';
+@import '~@angular/material/theming';
 @include mat-core();
 
 /* For use in src/lib/core/theming/_palette.scss */
@@ -76,4 +76,12 @@ $md-boco-theme: mat-light-theme($md-boco-primary, $md-boco-accent);
 
 .md-boco-theme {
   @include angular-material-theme($md-boco-theme);
+}
+
+.mat-tooltip {
+  background: mat-color($mat-grey, 700, 0.9);
+}
+
+.boco-spacer {
+  flex: 1 1 auto;
 }
