@@ -6,16 +6,15 @@ import {Observable} from "rxjs";
   selector: 'boco-events',
   styles: [`
     .events {
-      margin: 3em;
-      padding: 3em;
+      margin: 2em 0;
     }
   `],
   template: `
     <md-toolbar color="primary">
       <h5>Boulder Global Shaper Events</h5>
     </md-toolbar>
-    <div>
-      <div *ngFor="let event of $publishedEvents | async" class="events">
+    <div fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="80" *ngFor="let event of $publishedEvents | async" class="events">
         
         <boco-event-detail
           [shaperEvent]="event"

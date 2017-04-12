@@ -7,7 +7,7 @@ import {
   Pipe,
   PipeTransform
 } from '@angular/core';
-import {parseDate, TempEvent} from "../events.service";
+import { TempEvent } from "../events.service";
 import clone from 'ramda/src/clone';
 import compose from 'ramda/src/compose';
 import join from 'ramda/src/join';
@@ -102,7 +102,8 @@ export function deSlugify(slug: string): string {
 
                     <div>
                       <label for="eventDate">
-                        Date / Time {{_event.datetime | date:'medium' }}
+                        Date / Time {{_event.datetime
+                        }}
                       </label>
                       <input
                         id="eventDate"
@@ -299,7 +300,6 @@ export class EventEditorComponent implements OnChanges {
     if (this.slug) {
       event.slug = slugify(this.slug);
     }
-    event.datetime = parseDate(event.datetime);
     if (this.event.$key) {
       this.save.emit({$key: this.event.$key, event})
     } else {

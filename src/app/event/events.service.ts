@@ -35,10 +35,6 @@ export interface SocialMediaLink {
   eventBrite: string
 }
 
-export function parseDate(dateStr: string) {
-  return dateStr.replace('T',' ').replace('-','/');
-}
-
 @Injectable()
 export class EventsService {
   private $events: FirebaseListObservable<SEvent[]>;

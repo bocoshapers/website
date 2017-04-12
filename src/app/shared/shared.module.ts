@@ -12,7 +12,8 @@ import {
   MdSlideToggleModule,
   MdSnackBarModule,
   MdToolbarModule,
-  MdTooltipModule
+  MdTooltipModule,
+  OverlayContainer
 } from "@angular/material";
 
 let materialModules = [
@@ -45,4 +46,8 @@ let materialModules = [
     ModalComponent
   ]
 })
-export class SharedModule {}
+export class SharedModule {
+  constructor(overlayContainer: OverlayContainer) {
+    overlayContainer.themeClass = 'md-boco-theme';
+  }
+}
