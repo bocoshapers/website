@@ -45,7 +45,7 @@ import {UpdateEvent} from "../event-editor/event-editor.component";
         <md-list-item *ngFor="let event of $events | async" >
           <md-icon md-list-icon><a [routerLink]="['/events', event.slug]">link</a></md-icon>
           <h5 md-line>{{event.name}}</h5>
-          <h3 md-line>{{event.datetime | date:'medium' }}</h3>
+          <h3 md-line>{{event.datetime }}</h3>
           <a [routerLink]="['/events', event.$key, 'edit']" md-button><md-icon>mode_edit</md-icon></a>
           <button md-button color="warn" (click)="deleteEvent(event.$key)"><md-icon>delete_forever</md-icon></button>
         </md-list-item>

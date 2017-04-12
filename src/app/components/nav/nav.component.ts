@@ -6,16 +6,18 @@ import {AuthService} from "../../services/auth.service";
 @Component({
   selector: 'boco-nav',
   template: `
-    <md-toolbar color="accent" *ngIf="currentUser">
-      <span class="nav__profile">
-        <img [src]="currentUser.imageFile"/>
-      </span>
-      <span class="boco-spacer"></span>
-      <span><a md-button [routerLink]="'/'">Home</a></span>
-      <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
-      <span><a md-button [routerLink]="'/events/admin'">Events Dashboard</a></span>
-      <span (click)="logout()"><a md-button>logout</a></span>
-    </md-toolbar>
+    <div *ngIf="currentUser" fxFlex fxShow="false" fxShow.gt-sm>
+      <md-toolbar color="accent">
+        <span class="nav__profile">
+          <img [src]="currentUser.imageFile"/>
+        </span>
+        <span class="boco-spacer"></span>
+        <span><a md-button [routerLink]="'/'">Home</a></span>
+        <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
+        <span><a md-button [routerLink]="'/events/admin'">Events Dashboard</a></span>
+        <span (click)="logout()"><a md-button>logout</a></span>
+      </md-toolbar>
+    </div>
   `,
   styles: [
     `.nav__profile img {

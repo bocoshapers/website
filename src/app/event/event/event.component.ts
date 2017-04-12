@@ -9,14 +9,12 @@ import {Observable} from "rxjs";
   selector: 'boco-event',
   styles: [`
     .event {
-      margin: 2em 4em;
-      background-color: grey;
+      margin: 2em 0;
     }
-    
   `],
   template: `
-    <div class="event">
-      <div class="event__section" *ngIf="$shaperEvent">
+    <div class="event" fxLayout="row" fxLayoutAlign="center">
+      <div fxFlex="80" *ngIf="$shaperEvent">
         <boco-event-detail [shaperEvent]="$shaperEvent"></boco-event-detail>
       </div>
     </div>
