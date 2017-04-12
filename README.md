@@ -1,3 +1,3 @@
 # NgBoco
 
-http://bocoshapers.com
+https://bocoshapers.com
