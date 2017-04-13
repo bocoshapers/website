@@ -9,7 +9,7 @@ const APP_ROUTES = [
   { path: '', component: LandingComponent },
   { path: 'login', loadChildren: 'app/auth/auth.module#AuthModule' },
   { path: 'users', loadChildren: 'app/user/user.module#UserModule' },
-  { path: 'events', loadChildren: 'app/event/event.module#EventModule' }
+  { path: 'projects', loadChildren: 'app/event/event.module#EventModule' }
 ];
 
 @NgModule({

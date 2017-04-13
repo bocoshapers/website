@@ -12,7 +12,8 @@ export interface SEvent {
   slug: string
   name: string
   description: string
-  datetime: string;
+  date: string;
+  when?: { date: Date, from: Date, to: Date }
   location: string
   published: boolean
   smLinks: SocialMediaLink
@@ -23,7 +24,7 @@ export interface TempEvent {
   slug?: string
   name?: string
   description?: string
-  datetime?: string;
+  when?: { date: Date, from: Date, to: Date }
   location?: string
   published?: boolean
   smLinks?: SocialMediaLink
@@ -32,7 +33,7 @@ export interface TempEvent {
 export interface SocialMediaLink {
   facebook: string
   twitter: string
-  eventBrite: string
+  Eventbrite: string
 }
 
 @Injectable()

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {EventsService, SEvent} from "../events.service";
-import {Observable} from "rxjs";
+import { EventsService, SEvent } from "../events.service";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'boco-events',
@@ -14,7 +14,7 @@ import {Observable} from "rxjs";
       <h5>Boulder Global Shaper Events</h5>
     </md-toolbar>
     <div fxLayout="row" fxLayoutAlign="center">
-      <div fxFlex="80" *ngFor="let event of $publishedEvents | async" class="events">
+      <div fxFlex="95" fxFlex.gt-md="66" *ngFor="let event of $publishedEvents | async" class="events">
         
         <boco-event-detail
           [shaperEvent]="event"

@@ -26,6 +26,35 @@ export class SlugifyPipe implements PipeTransform {
   }
 }
 
+@Pipe({name: 'time'})
+export class TimePipe implements PipeTransform {
+  transform(time: string) {
+    if (time != null) {
+      let [hour, min] = time.split(':');
+      let hourNum = parseInt(hour, 0);
+      let period;
+      switch (true) {
+        case (hourNum > 12 && hourNum < 24):
+          hourNum -= 12;
+          period = 'pm';
+          break;
+        case (hourNum === 0):
+          hourNum = 12;
+          period = 'am';
+          break;
+        case (hourNum === 12):
+          period = 'pm';
+          break;
+        default:
+          period = 'am';
+          break;
+      }
+      return `${hourNum}:${min} ${period}`;
+    }
+    return '';
+  }
+}
+
 const toLower = (s:string) => s.toLowerCase();
 
 export function slugify(str: string): string {
@@ -67,213 +96,7 @@ export function deSlugify(slug: string): string {
       color: red;
     }
   `],
-  template: `
-    <div *ngIf="_event">
-      <md-toolbar color="primary">
-        <h5>{{event?.$key ? 'Edit' : 'Add'}} {{_event.name}}</h5>
-        <span class="boco-spacer"></span>
-        <md-slide-toggle
-          [color]="'warn'"
-          (change)="_event.published = !_event.published"
-          [checked]="_event.published">
-          Published
-        </md-slide-toggle>
-      </md-toolbar>
-      <div fxLayout="row">
-        <div fxFlex="{{preview ? '66' : '100'}}">
-          <form #eventForm="ngForm">
-            <md-card>
-              <md-card-content>
-                
-                <div>
-                  <div class="non-md__form-group">
-                    <div>
-                      <label for="eventImg">{{event?.key ? 'Replace' : 'Upload'}} Image</label>
-                      <input
-                        id="eventImg"
-                        type="file"
-                        name="eventPhoto"
-                        (change)="handleFile($event)">
-                      
-                      <div *ngIf="_event.photo == null" class="invalidControl">
-                        <small>Photo is required</small>
-                      </div>
-                    </div>
-
-                    <div>
-                      <label for="eventDate">
-                        Date / Time {{_event.datetime
-                        }}
-                      </label>
-                      <input
-                        id="eventDate"
-                        required
-                        [(ngModel)]="_event.datetime"
-                        name="eventDate"
-                        #dateTime="ngModel"
-                        placeholder="Event Date"
-                        type="datetime-local">
-                      
-                      <div *ngIf="dateTime.errors" class="invalidControl">
-                        <small>Date / Time is required</small>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div fxLayout="column" class="md__form--group">
-                  
-                  <md-input-container>
-                    <input
-                      required
-                      mdInput
-                      [(ngModel)]="_event.name"
-                      name="eventName"
-                      #name="ngModel"
-                      placeholder="Event name">
-                    
-                    <md-hint
-                      *ngIf="name.errors" 
-                      class="invalidControl"
-                      align="start">Name is required
-                    </md-hint>
-                  </md-input-container>
-
-                  <md-input-container>
-                    <input
-                      required
-                      mdInput
-                      [(ngModel)]="slug"
-                      name="eventSlug"
-                      #slugErr="ngModel"
-                      placeholder="Event Slug">
-                    
-                    <md-hint *ngIf="!slugErr.errors">
-                      {{slug | slugify}}
-                    </md-hint>
-                    
-                    <md-hint
-                      *ngIf="slugErr.errors" 
-                      class="invalidControl"
-                      align="start">
-                      Path slug is required
-                    </md-hint>
-                  </md-input-container>
-                  
-                  <md-input-container>
-                    <input
-                      mdInput
-                      required
-                      [(ngModel)]="_event.location"
-                      placeholder="Event Location"
-                      #location="ngModel"
-                      name="eventLocation">
-
-                    <md-hint
-                      *ngIf="location.errors" 
-                      class="invalidControl"
-                      align="start">
-                      Location is required
-                    </md-hint>
-                  </md-input-container>
-
-                  <md-input-container>
-                    <input
-                      mdInput
-                      required
-                      [(ngModel)]="_event.smLinks.facebook"
-                      placeholder="Facebook link"
-                      name="smLinkFacebook"
-                      #fbUrl="ngModel"
-                      type="url">
-
-                    <md-hint
-                      *ngIf="fbUrl.errors" 
-                      class="invalidControl"
-                      align="start">
-                      Facebook url is required.
-                    </md-hint>
-
-                  </md-input-container>
-
-                  <md-input-container>
-                    <input
-                      required
-                      mdInput
-                      [(ngModel)]="_event.smLinks.twitter"
-                      placeholder="twitter link"
-                      name="smLinkTwitter"
-                      #twitterUrl="ngModel"
-                      type="url">
-
-                    <md-hint
-                      *ngIf="twitterUrl.errors" 
-                      class="invalidControl"
-                      align="start">
-                      twitter url is required.
-                    </md-hint>
-
-                  </md-input-container>
-
-                  <md-input-container>
-                    <input
-                      required
-                      mdInput
-                      [(ngModel)]="_event.smLinks.eventBrite"
-                      placeholder="EventBrite link"
-                      name="smLinkEventBrite"
-                      #ebUrl="ngModel"
-                      type="url">
-
-                    <md-hint
-                      *ngIf="ebUrl.errors" 
-                      class="invalidControl"
-                      align="start">
-                      EventBrite is required.
-                    </md-hint>
-
-                  </md-input-container>
-
-                  <md-input-container>
-                      <textarea
-                        mdInput
-                        required
-                        [(ngModel)]="_event.description"
-                        name="evetnDescription"
-                        #description="ngModel"
-                        placeholder="Event Description">
-                      </textarea>
-
-                    <md-hint
-                      *ngIf="description.errors" 
-                      class="invalidControl"
-                      align="start">
-                      Description is required
-                    </md-hint>
-                  </md-input-container>
-                </div>
-              </md-card-content>
-              <md-card-actions>
-                <button type="submit" md-button
-                        (click)="onSave(_event)"
-                        [disabled]="!eventForm.form.valid || !_event?.photo">save event</button>
-                <ng-container *ngIf="preview">
-                  <button md-button (click)="onCancel()">cancel</button>
-                  <a md-button [routerLink]="'/events/admin'">back</a>
-                </ng-container>
-              </md-card-actions>
-            </md-card>
-          </form>
-        </div>
-
-        <div fxFlex="33" *ngIf="preview">
-          <div class="downscale">
-            <boco-event-detail [shaperEvent]="_event"></boco-event-detail>
-          </div>
-        </div>
-      </div>
-    </div>
-  `
+  templateUrl: './event-editor.component.html'
 })
 export class EventEditorComponent implements OnChanges {
   public _event: TempEvent;
@@ -300,6 +123,7 @@ export class EventEditorComponent implements OnChanges {
     if (this.slug) {
       event.slug = slugify(this.slug);
     }
+    event.description.trim();
     if (this.event.$key) {
       this.save.emit({$key: this.event.$key, event})
     } else {
@@ -319,7 +143,7 @@ export class EventEditorComponent implements OnChanges {
         'name',
         'description',
         'location',
-        'datetime',
+        'when',
         'published',
         'smLinks'
       ];

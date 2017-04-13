@@ -6,7 +6,7 @@ import {EventRoutes} from "./event.routes";
 import { AdminEventsComponent } from './admin-events/admin-events.component';
 import {SharedModule} from "../shared/shared.module";
 import {EventsService} from "./events.service";
-import {EventEditorComponent, SlugifyPipe} from './event-editor/event-editor.component';
+import {EventEditorComponent, SlugifyPipe, TimePipe} from './event-editor/event-editor.component';
 import {FormsModule} from "@angular/forms";
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { EventEditComponent } from './event-edit/event-edit.component';
@@ -25,7 +25,8 @@ import { EventEditComponent } from './event-edit/event-edit.component';
     EventEditorComponent,
     SlugifyPipe,
     EventDetailComponent,
-    EventEditComponent
+    EventEditComponent,
+    TimePipe
   ],
   providers: [
     EventsService

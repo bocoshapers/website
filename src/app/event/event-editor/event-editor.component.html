@@ -1,0 +1,239 @@
+<div *ngIf="_event">
+  <md-toolbar color="primary">
+    <h5>{{event?.$key ? 'Edit' : 'Add'}} {{_event.name}}</h5>
+    <span class="boco-spacer"></span>
+    <md-slide-toggle
+      [color]="'warn'"
+      (change)="_event.published = !_event.published"
+      [checked]="_event.published">
+      Published
+    </md-slide-toggle>
+  </md-toolbar>
+  <div fxLayout="row">
+    <div fxFlex="{{preview ? '66' : '100'}}">
+      <form #eventForm="ngForm">
+        <md-card>
+          <md-card-content>
+
+            <section fxLayout="row" fxLayoutAlign="center">
+                <div fxFlex>
+                  <div>
+                    <label for="eventImg">{{event?.key ? 'Replace' : 'Upload'}} Image</label>
+                    <input
+                      id="eventImg"
+                      type="file"
+                      name="eventPhoto"
+                      (change)="handleFile($event)">
+
+                    <div *ngIf="_event.photo == null" class="invalidControl">
+                      <small>Photo is required</small>
+                    </div>
+                  </div>
+                </div>
+
+                <div fxFlex>
+                  <div>
+                    <label for="eventDay">Day</label>
+                    <input
+                      id="eventDay"
+                      required
+                      [(ngModel)]="_event.when.date"
+                      name="eventDay"
+                      #eventDate="ngModel"
+                      placeholder="Day of event"
+                      type="date">
+
+                    <div *ngIf="eventDate.errors" class="invalidControl">
+                      <small>Date is required</small>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="eventStart">From</label>
+                    <input
+                      id="eventStart"
+                      required
+                      [(ngModel)]="_event.when.from"
+                      name="eventStart"
+                      #eventStart="ngModel"
+                      placeholder="Start time"
+                      type="time">
+
+                    <div *ngIf="eventStart.errors" class="invalidControl">
+                      <small>Start time is required</small>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label for="eventEnd">To</label>
+                    <input
+                      id="eventEnd"
+                      required
+                      [(ngModel)]="_event.when.to"
+                      name="eventEnd"
+                      #eventEnd="ngModel"
+                      placeholder="End time"
+                      type="time">
+
+                    <div *ngIf="eventEnd.errors" class="invalidControl">
+                      <small>End time is required</small>
+                    </div>
+                  </div>
+                </div>
+
+            </section>
+
+            <section fxLayout="column" class="md__form--group">
+
+              <md-input-container>
+                <input
+                  required
+                  mdInput
+                  [(ngModel)]="_event.name"
+                  name="eventName"
+                  #name="ngModel"
+                  placeholder="Event name">
+
+                <md-hint
+                  *ngIf="name.errors"
+                  class="invalidControl"
+                  align="start">Name is required
+                </md-hint>
+              </md-input-container>
+
+              <md-input-container>
+                <input
+                  required
+                  mdInput
+                  [(ngModel)]="slug"
+                  name="eventSlug"
+                  #slugErr="ngModel"
+                  placeholder="Event Slug">
+
+                <md-hint *ngIf="!slugErr.errors">
+                  {{slug | slugify}}
+                </md-hint>
+
+                <md-hint
+                  *ngIf="slugErr.errors"
+                  class="invalidControl"
+                  align="start">
+                  Path slug is required
+                </md-hint>
+              </md-input-container>
+
+              <md-input-container>
+                <input
+                  mdInput
+                  required
+                  [(ngModel)]="_event.location"
+                  placeholder="Event Location"
+                  #location="ngModel"
+                  name="eventLocation">
+
+                <md-hint
+                  *ngIf="location.errors"
+                  class="invalidControl"
+                  align="start">
+                  Location is required
+                </md-hint>
+              </md-input-container>
+
+              <md-input-container>
+                <input
+                  mdInput
+                  required
+                  [(ngModel)]="_event.smLinks.facebook"
+                  placeholder="Facebook link"
+                  name="smLinkFacebook"
+                  #fbUrl="ngModel"
+                  type="url">
+
+                <md-hint
+                  *ngIf="fbUrl.errors"
+                  class="invalidControl"
+                  align="start">
+                  Facebook url is required.
+                </md-hint>
+
+              </md-input-container>
+
+              <md-input-container>
+                <input
+                  required
+                  mdInput
+                  [(ngModel)]="_event.smLinks.twitter"
+                  placeholder="twitter link"
+                  name="smLinkTwitter"
+                  #twitterUrl="ngModel"
+                  type="url">
+
+                <md-hint
+                  *ngIf="twitterUrl.errors"
+                  class="invalidControl"
+                  align="start">
+                  twitter url is required.
+                </md-hint>
+
+              </md-input-container>
+
+              <md-input-container>
+                <input
+                  required
+                  mdInput
+                  [(ngModel)]="_event.smLinks.eventBrite"
+                  placeholder="EventBrite link"
+                  name="smLinkEventBrite"
+                  #ebUrl="ngModel"
+                  type="url">
+
+                <md-hint
+                  *ngIf="ebUrl.errors"
+                  class="invalidControl"
+                  align="start">
+                  EventBrite is required.
+                </md-hint>
+
+              </md-input-container>
+
+              <md-input-container>
+                      <textarea
+                        mdInput
+                        required
+                        [(ngModel)]="_event.description"
+                        name="evetnDescription"
+                        #description="ngModel"
+                        placeholder="Event Description">
+                      </textarea>
+
+                <md-hint
+                  *ngIf="description.errors"
+                  class="invalidControl"
+                  align="start">
+                  Description is required
+                </md-hint>
+              </md-input-container>
+            </section>
+
+          </md-card-content>
+          <md-card-actions>
+            <button type="submit" md-button
+                    (click)="onSave(_event)"
+                    [disabled]="!eventForm.form.valid || !_event?.photo">save event
+            </button>
+            <ng-container *ngIf="preview">
+              <button md-button (click)="onCancel()">cancel</button>
+              <a md-button [routerLink]="'/projects/admin'">back</a>
+            </ng-container>
+          </md-card-actions>
+        </md-card>
+      </form>
+    </div>
+
+    <div fxFlex="33" *ngIf="preview">
+      <div class="downscale">
+        <boco-event-detail [shaperEvent]="_event"></boco-event-detail>
+      </div>
+    </div>
+  </div>
+</div>

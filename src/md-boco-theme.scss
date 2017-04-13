@@ -74,12 +74,21 @@ $md-boco-primary: mat-palette($md-bocopallette);
 $md-boco-accent: mat-palette($md-bocoaccent);
 $md-boco-theme: mat-light-theme($md-boco-primary, $md-boco-accent);
 
+
 .md-boco-theme {
   @include angular-material-theme($md-boco-theme);
 }
 
 .mat-tooltip {
   background: mat-color($mat-grey, 700, 0.9);
+}
+
+.accent-bg {
+  background-color: map-get($md-boco-accent, 500);
+}
+
+.primary-bg {
+  background-color: map-get($md-boco-primary, 500);
 }
 
 .boco-spacer {

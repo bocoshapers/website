@@ -8,6 +8,14 @@ import {SEvent} from "../events.service";
       text-align: center;
     }
     
+    .smLink {
+      padding: 1.3em 0;
+    }
+    
+    .boco-logo {  
+      background: url('assets/images/boco-logo.png');
+      background-size: cover;
+    }
     
   `],
   template: `
@@ -15,29 +23,29 @@ import {SEvent} from "../events.service";
       <ng-container *ngIf="!preview; else previewBlock">
         
         <md-card class="mat-card-flat">
+          <md-card-header color="accent">
+            <div md-card-avatar class="boco-logo"></div>
+            <md-card-title>{{ name }}</md-card-title>
+            <md-card-subtitle>{{location}} {{ day | date }} {{ from | time }} to {{ to | time }}</md-card-subtitle>
+          </md-card-header>
+          
           <img md-card-image [src]="photo">
         </md-card>
-
-        <md-toolbar class="event__details" color="primary">
-            <div class="boco-spacer">
-              <h5><i>when: </i>{{eventDate}}</h5>
-            </div>
-            <div class="boco-spacer">
-              <h5 class="boco-spacer"><i>where: </i>{{location}}</h5>
-            </div>
-        </md-toolbar>
+        
+        <div class="primary-bg" fxLayoutAlign="row" fxLayoutAlign="space-around center" fxLayoutWrap fxLayoutGap="2px">
+          <div class="smLink" *ngFor="let smLink of smLinkKeys">
+            <a
+              md-raised-button
+              target="_blank"
+              rel="noopener noreferrer"
+              [href]="smLinks[smLink]">{{smLink}}
+              <md-icon>open_in_new</md-icon>
+            </a>
+          </div>
+        </div>
         
         <md-card class="mat-card-flat">
           <md-card-content>
-            <div *ngFor="let smLink of smLinkKeys">
-              <a
-                md-button
-                target="_blank"
-                rel="noopener noreferrer"
-                [href]="smLinks[smLink]">{{smLink}}
-                <md-icon>open_in_new</md-icon>
-              </a>
-            </div>
             <span [innerHtml]="description"></span>
           </md-card-content>
         </md-card>
@@ -51,7 +59,7 @@ import {SEvent} from "../events.service";
           </md-card-header>
           <img md-card-image [src]="photo">
           <md-card-actions>
-            <a [routerLink]="['/events', slug]" md-button color="primary">see more</a>
+            <a [routerLink]="['/projects', slug]" md-button color="primary">see more</a>
           </md-card-actions>
         </md-card>
         
@@ -77,8 +85,16 @@ export class EventDetailComponent {
     return this.shaperEvent.photo;
   }
 
-  get eventDate() {
-    return this.shaperEvent.datetime;
+  get day() {
+    return this.shaperEvent.when.date;
+  }
+
+  get from() {
+    return this.shaperEvent.when.from;
+  }
+
+  get to() {
+    return this.shaperEvent.when.to;
   }
 
   get location() {

@@ -40,13 +40,13 @@ import {UpdateEvent} from "../event-editor/event-editor.component";
       </boco-modal>
 
       <md-list>
-        <h3 md-subheader><a [routerLink]="'/events'" md-button>Events page</a></h3>
+        <h3 md-subheader><a [routerLink]="'/projects'" md-button>Events page</a></h3>
 
         <md-list-item *ngFor="let event of $events | async" >
-          <md-icon md-list-icon><a [routerLink]="['/events', event.slug]">link</a></md-icon>
-          <h5 md-line>{{event.name}}</h5>
-          <h3 md-line>{{event.datetime }}</h3>
-          <a [routerLink]="['/events', event.$key, 'edit']" md-button><md-icon>mode_edit</md-icon></a>
+          <md-icon md-list-icon><a [routerLink]="['/projects', event.slug]">link</a></md-icon>
+          <h5 md-line>{{ event.name }}</h5>
+          <h3 md-line>{{ event.when.date | date:'yMd' }} {{ event.when.from | time }} to {{ event.when.to | time }}</h3> 
+          <a [routerLink]="['/projects', event.$key, 'edit']" md-button><md-icon>mode_edit</md-icon></a>
           <button md-button color="warn" (click)="deleteEvent(event.$key)"><md-icon>delete_forever</md-icon></button>
         </md-list-item>
       </md-list>
@@ -69,7 +69,12 @@ export class AdminEventsComponent implements OnInit {
       smLinks: {
         facebook: '',
         twitter: '',
-        eventBrite: ''
+        Eventbrite: ''
+      },
+      when: {
+        date: new Date(),
+        from: new Date,
+        to: new Date()
       },
       published: false
     };
