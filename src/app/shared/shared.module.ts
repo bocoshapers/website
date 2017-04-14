@@ -15,6 +15,7 @@ import {
   MdTooltipModule,
   OverlayContainer
 } from "@angular/material";
+import { BocoSnackbarComponent } from './boco-snackbar/boco-snackbar.component';
 
 let materialModules = [
   MdButtonModule,
@@ -43,7 +44,11 @@ let materialModules = [
   ],
   declarations: [
     ShaperComponent,
-    ModalComponent
+    ModalComponent,
+    BocoSnackbarComponent
+  ],
+  entryComponents: [
+    BocoSnackbarComponent
   ]
 })
 export class SharedModule {

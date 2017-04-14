@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {BocoSnackbar, LoginComponent} from "./login/login.component";
+import { LoginComponent} from "./login/login.component";
 import { AuthRoutes } from "./auth.routes";
 import { FormsModule } from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
@@ -13,11 +13,7 @@ import { SharedModule } from "../shared/shared.module";
     SharedModule
   ],
   declarations: [
-    LoginComponent,
-    BocoSnackbar
-  ],
-  entryComponents: [
-    BocoSnackbar
+    LoginComponent
   ]
 })
 export class AuthModule { }

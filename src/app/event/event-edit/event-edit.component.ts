@@ -3,6 +3,9 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {EventsService} from "../events.service";
 // import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import {MdSnackBar} from "@angular/material";
+import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.component";
+import {UpdateEvent} from "../event-editor/event-editor.component";
 
 @Component({
   selector: 'boco-event-edit',
@@ -24,6 +27,7 @@ export class EventEditComponent implements OnInit, OnDestroy {
   public $editEvent;
   private $sub;
   constructor(
+    private bocoSnackbar: MdSnackBar,
     private eventsService: EventsService,
     private route: ActivatedRoute) {
 
@@ -59,9 +63,9 @@ export class EventEditComponent implements OnInit, OnDestroy {
     }
   }
 
-  private _updateEvent(update) {
+  private _updateEvent(update: UpdateEvent) {
     this.eventsService.updateEvent(update)
-      .then(snapshot => snapshot)
+      .then(snapshot => this.showSnackBar('Updates Saved!'))
       .catch(e => console.log('update error', e))
   }
 
@@ -74,4 +78,11 @@ export class EventEditComponent implements OnInit, OnDestroy {
       .catch(e => console.log('image upload error', e));
   }
 
+  private showSnackBar(message) {
+    console.log('snap', message);
+    let snackBarRef = this.bocoSnackbar.openFromComponent(BocoSnackbarComponent, {
+      duration: 3500
+    });
+    snackBarRef.instance.message = message;
+  }
 }
