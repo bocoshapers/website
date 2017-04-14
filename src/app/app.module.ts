@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule, AuthProviders, AuthMethods } from "angularfire2";
-import { FIREBASE_CONF } from "../environments/firebase";
+import { FIREBASE_CONF, FIREBASE_DEV_CONFIG } from "../environments/firebase";
 
 import { AppComponent } from './app.component';
 import { TeamComponent } from './components/team/team.component';
@@ -19,11 +19,14 @@ import { NavComponent } from './components/nav/nav.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EventModule} from "./event/event.module";
 import {UploadService} from "./services/upload.service";
+import {environment} from "../environments/environment";
 
 const firebaseAuthConfig = {
   provider: AuthProviders.Password,
   method: AuthMethods.Password
 };
+
+const FIREBASE_CONFIG = environment.production ? FIREBASE_CONF : FIREBASE_DEV_CONFIG;
 
 @NgModule({
   declarations: [
@@ -36,7 +39,7 @@ const firebaseAuthConfig = {
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    AngularFireModule.initializeApp(FIREBASE_CONF, firebaseAuthConfig),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG, firebaseAuthConfig),
     AppRoutesModule,
     AuthModule,
     UserModule,
