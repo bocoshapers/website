@@ -2,10 +2,6 @@ h1, h2, h3, h4, h5, h6, hr {
   color: #646464
 }
 
-.gb-earth-week {
-  padding: 0.5em;
-}
-
 p {
   color: #777;
 }
@@ -53,6 +49,6 @@ p {
   padding: 2em 0;
 }
 
-.bocoshapers__footer h1, h3 {
+.bocoshapers__footer h1, .bocoshapers__footer a {
   color: #fff;
 }

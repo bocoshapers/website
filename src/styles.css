@@ -5,6 +5,10 @@
   /*padding: 1.3em 0;*/
 }
 
+.landing-banner md-toolbar-row {
+  justify-content: center;
+}
+
 @media only screen
 and (min-device-width: 320px)
 and (max-device-width: 480px) {
