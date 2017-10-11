@@ -10,6 +10,8 @@ before_script:
   - npm install -g firebase-tools
   - npm install -g @angular/cli@1.0.0
   - npm install angularfire2@2.0.0-beta.8 --save
+  - echo "export const FIREBASE_PROD = '$FIREBASE_PROD'" > src/environments/firebase.keys.ts
+  - echo "export const FIREBASE_DEV = '$FIREBASE_DEV'" > src/environments/firebase.keys.ts
 
 script:
   - ng build --prod --aot --base-href "https://bocoshapers.com/"

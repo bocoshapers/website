@@ -2,11 +2,11 @@
  * Created by githop on 3/16/17.
  */
 
-const prodApiKey = process.env.FIREBASE_PROD;
-const devApiKey = process.env.FIREBASE_DEV;
+
+import { FIREBASE_PROD, FIREBASE_DEV } from './firebase.keys'
 
 export const FIREBASE_CONF = {
-  apiKey: prodApiKey,
+  apiKey: FIREBASE_PROD,
   authDomain: "boco-backend.firebaseapp.com",
   databaseURL: "https://boco-backend.firebaseio.com",
   storageBucket: "boco-backend.appspot.com",
@@ -14,7 +14,7 @@ export const FIREBASE_CONF = {
 };
 
 export const FIREBASE_DEV_CONFIG = {
-  apiKey: devApiKey,
+  apiKey: FIREBASE_DEV,
   authDomain: "dev-boco-backend.firebaseapp.com",
   databaseURL: "https://dev-boco-backend.firebaseio.com",
   projectId: "dev-boco-backend",
