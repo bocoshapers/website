@@ -32,10 +32,6 @@ npm-debug.log
 testem.log
 /typings
 
-#firebase
-src/environments/firebase.ts
-
-
 # e2e
 /e2e/*.js
 /e2e/*.map
@@ -43,3 +39,5 @@ src/environments/firebase.ts
 #System Files
 .DS_Store
 Thumbs.db
+
+.env
