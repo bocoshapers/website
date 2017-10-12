@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {EventsService, SEvent, TempEvent} from "../events.service";
-import {FirebaseListObservable} from "angularfire2";
+import {EventsService, SEvent, ITempEvent} from "../events.service";
 import 'rxjs/add/operator/map';
 import {UpdateEvent} from "../event-editor/event-editor.component";
-
+import { FirebaseListObservable } from 'angularfire2/database';
 @Component({
   selector: 'boco-admin-events',
   styles: [`    
@@ -54,7 +53,7 @@ import {UpdateEvent} from "../event-editor/event-editor.component";
   `
 })
 export class AdminEventsComponent implements OnInit {
-  public newEvent: TempEvent;
+  public newEvent: ITempEvent | null;
   public editEvent: SEvent;
   public $events: FirebaseListObservable<SEvent[]>;
   constructor(private eventsService: EventsService) {
@@ -84,7 +83,7 @@ export class AdminEventsComponent implements OnInit {
     this.newEvent = null;
   }
 
-  onEventSave(update: TempEvent): void {
+  onEventSave(update: ITempEvent | null): void {
     this._saveNewEvent(update);
   }
 
@@ -93,7 +92,7 @@ export class AdminEventsComponent implements OnInit {
   }
 
   //TODO: add validation to ensure necessary data is present when attempting to save
-  private _saveNewEvent(te: TempEvent) {
+  private _saveNewEvent(te: ITempEvent | null) {
     this.eventsService.addEvent(te)
       .then(snapShot => snapShot.key)
       .then(key => this._uploadEventPhoto(key, te.photo, te))

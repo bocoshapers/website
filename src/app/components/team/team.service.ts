@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseListObservable} from "angularfire2";
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+
 
 export interface Shaper {
   first: string
@@ -12,8 +13,8 @@ export interface Shaper {
 export class TeamService {
   private $shapers: FirebaseListObservable<Shaper[]>;
 
-  constructor(af: AngularFire) {
-    this.$shapers = af.database.list('/shapers');
+  constructor(db: AngularFireDatabase) {
+    this.$shapers = db.list('/shapers');
   }
 
   get shapers() {

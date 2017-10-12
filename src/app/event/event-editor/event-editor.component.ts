@@ -7,7 +7,7 @@ import {
   Pipe,
   PipeTransform
 } from '@angular/core';
-import { TempEvent } from "../events.service";
+import { ITempEvent } from "../events.service";
 import clone from 'ramda/src/clone';
 import compose from 'ramda/src/compose';
 import join from 'ramda/src/join';
@@ -16,7 +16,7 @@ import pickAll from 'ramda/src/pickAll';
 
 export interface UpdateEvent {
   $key?: string
-  event?: TempEvent
+  event?: ITempEvent | null
 }
 
 @Pipe({name: 'slugify'})
@@ -99,11 +99,11 @@ export function deSlugify(slug: string): string {
   templateUrl: './event-editor.component.html'
 })
 export class EventEditorComponent implements OnChanges {
-  public _event: TempEvent;
+  public _event: ITempEvent | null;
   public slug: string = '';
-  @Input() event: TempEvent;
+  @Input() event: ITempEvent | null;
   @Input() preview: boolean = false;
-  @Output() save = new EventEmitter<TempEvent | UpdateEvent>();
+  @Output() save = new EventEmitter<ITempEvent | UpdateEvent | null>();
   @Output() cancel = new EventEmitter();
 
   ngOnChanges() {

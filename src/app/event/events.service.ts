@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseListObservable} from "angularfire2";
 import {UpdateEvent} from "./event-editor/event-editor.component";
 import {UploadService} from "../services/upload.service";
 import 'rxjs/add/operator/map';
 import filter from 'ramda/src/filter'
 import head from 'ramda/src/head';
+import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
 
 export interface SEvent {
   $key?: string
@@ -18,7 +18,8 @@ export interface SEvent {
   published: boolean
   smLinks: SocialMediaLink
 }
-export interface TempEvent {
+
+export interface ITempEvent {
   $key?: string
   photo?: string
   slug?: string
@@ -39,8 +40,8 @@ export interface SocialMediaLink {
 @Injectable()
 export class EventsService {
   private $events: FirebaseListObservable<SEvent[]>;
-  constructor(private af: AngularFire, private uploadService: UploadService) {
-    this.$events = af.database.list('/events');
+  constructor(private db: AngularFireDatabase, private uploadService: UploadService) {
+    this.$events = db.list('/events');
   }
 
   get events() {
@@ -63,7 +64,7 @@ export class EventsService {
       .map(events => filter(e => e.published === true, events));
   }
 
-  addEvent(event: TempEvent) {
+  addEvent(event: ITempEvent | null) {
     if (event !== null) {
      return this.$events.push(event);
     }
