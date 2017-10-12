@@ -2,7 +2,6 @@ import 'hammerjs';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
-import { AngularFireModule, AuthProviders, AuthMethods } from "angularfire2";
 import { FIREBASE_CONF, FIREBASE_DEV_CONFIG } from "../environments/firebase";
 
 import { AppComponent } from './app.component';
@@ -20,11 +19,9 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {EventModule} from "./event/event.module";
 import {UploadService} from "./services/upload.service";
 import {environment} from "../environments/environment";
-
-const firebaseAuthConfig = {
-  provider: AuthProviders.Password,
-  method: AuthMethods.Password
-};
+import {AngularFireModule} from 'angularfire2';
+import {AngularFireDatabaseModule} from 'angularfire2/database';
+import {AngularFireAuthModule} from 'angularfire2/auth';
 
 const FIREBASE_CONFIG = environment.production ? FIREBASE_CONF : FIREBASE_DEV_CONFIG;
 
@@ -39,7 +36,9 @@ const FIREBASE_CONFIG = environment.production ? FIREBASE_CONF : FIREBASE_DEV_CO
     BrowserModule,
     BrowserAnimationsModule,
     HttpModule,
-    AngularFireModule.initializeApp(FIREBASE_CONFIG, firebaseAuthConfig),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AppRoutesModule,
     AuthModule,
     UserModule,

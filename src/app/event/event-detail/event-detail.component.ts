@@ -70,7 +70,7 @@ import {SEvent} from "../events.service";
 })
 export class EventDetailComponent {
 
-  @Input() shaperEvent: SEvent;
+  @Input() shaperEvent: SEvent | null;
   @Input() preview: boolean = false;
 
   get name() {

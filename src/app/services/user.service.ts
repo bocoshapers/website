@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import {AngularFire} from "angularfire2";
 import {AuthService} from "./auth.service";
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
 import {Observable} from "rxjs";
 import {UploadService} from "./upload.service";
+import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
 export class UserService {
   constructor(
-    private af: AngularFire,
+    private db: AngularFireDatabase,
     private uploadService: UploadService,
     private auth: AuthService) { }
 
@@ -20,7 +20,7 @@ export class UserService {
   }
 
   getShaper(uuid: string) {
-    return this.af.database.object(`/shapers/${uuid}`);
+    return this.db.object(`/shapers/${uuid}`);
   }
 
   updateShaper(shaper) {
@@ -30,7 +30,7 @@ export class UserService {
   }
 
   private _updateShaper(uid, shaper) {
-    return this.af.database.object(`/shapers/${uid}`).update(shaper);
+    return this.db.object(`/shapers/${uid}`).update(shaper);
   }
 
 

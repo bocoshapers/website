@@ -66,6 +66,6 @@ import {Shaper} from "../../components/team/team.service";
   `
 })
 export class ShaperComponent {
-  @Input() shaper: Shaper;
+  @Input() shaper: Shaper | null;
   @Input() detail?: boolean;
 }
