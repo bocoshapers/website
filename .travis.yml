@@ -19,5 +19,10 @@ after_success:
   - firebase deploy --token $FIREBASE_TOKEN
 
 notifications:
-  slack: globalshapersboulder:$SLACK_TOKEN
+  slack:
+    rooms:
+      - globalshapersboulder:$SLACK_TOKEN#website-builds
+    on_success: always
+    on_failure: always
+  
     
