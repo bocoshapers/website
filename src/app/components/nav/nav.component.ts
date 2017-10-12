@@ -6,7 +6,7 @@ import {AuthService} from "../../services/auth.service";
 @Component({
   selector: 'boco-nav',
   template: `
-    <div *ngIf="currentUser" fxShow="false" fxShow.gt-sm>
+    <div *ngIf="currentUser != null">
       <md-toolbar color="accent">
         <span class="nav__profile">
           <img [src]="currentUser.imageFile"/>
