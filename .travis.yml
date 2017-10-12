@@ -9,8 +9,8 @@ branches:
 before_script:
   - npm install -g firebase-tools
   - npm install -g @angular/cli@1.4.5
-  - cd functions && npm install
   - echo "export const FIREBASE_PROD = '$FIREBASE_PROD'; export const FIREBASE_DEV = '$FIREBASE_DEV';" > src/environments/firebase.keys.ts
+  - cd functions && npm install && cd ..
 
 script:
   - ng build --prod --aot --base-href "https://bocoshapers.com/"
