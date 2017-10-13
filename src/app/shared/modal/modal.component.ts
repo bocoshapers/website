@@ -6,5 +6,5 @@ import {Component, Input} from '@angular/core';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent {
-  @Input() trigger: boolean
+  @Input() trigger: boolean;
 }

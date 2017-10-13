@@ -1,45 +1,46 @@
 import { Injectable } from '@angular/core';
-import {UpdateEvent} from "./event-editor/event-editor.component";
-import {UploadService} from "../services/upload.service";
+import { UpdateEvent } from './event-editor/event-editor.component';
+import { UploadService } from '../services/upload.service';
 import 'rxjs/add/operator/map';
-import filter from 'ramda/src/filter'
+import filter from 'ramda/src/filter';
 import head from 'ramda/src/head';
-import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
 
 export interface SEvent {
-  $key?: string
-  photo: string
-  slug: string
-  name: string
-  description: string
+  $key?: string;
+  photo: string;
+  slug: string;
+  name: string;
+  description: string;
   date: string;
-  when?: { date: Date, from: Date, to: Date }
-  location: string
-  published: boolean
-  smLinks: SocialMediaLink
+  when?: { date: Date, from: Date, to: Date };
+  location: string;
+  published: boolean;
+  smLinks: SocialMediaLink;
 }
 
 export interface ITempEvent {
-  $key?: string
-  photo?: string
-  slug?: string
-  name?: string
-  description?: string
-  when?: { date: Date, from: Date, to: Date }
-  location?: string
-  published?: boolean
-  smLinks?: SocialMediaLink
+  $key?: string;
+  photo?: string;
+  slug?: string;
+  name?: string;
+  description?: string;
+  when?: { date: Date, from: Date, to: Date };
+  location?: string;
+  published?: boolean;
+  smLinks?: SocialMediaLink;
 }
 
 export interface SocialMediaLink {
-  facebook: string
-  twitter: string
-  Eventbrite: string
+  facebook: string;
+  twitter: string;
+  Eventbrite: string;
 }
 
 @Injectable()
 export class EventsService {
   private $events: FirebaseListObservable<SEvent[]>;
+
   constructor(private db: AngularFireDatabase, private uploadService: UploadService) {
     this.$events = db.list('/events');
   }
@@ -66,7 +67,7 @@ export class EventsService {
 
   addEvent(event: ITempEvent | null) {
     if (event !== null) {
-     return this.$events.push(event);
+      return this.$events.push(event);
     }
   }
 
