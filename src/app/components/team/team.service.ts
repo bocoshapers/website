@@ -3,6 +3,8 @@ import {AngularFireDatabase, FirebaseListObservable} from 'angularfire2/database
 
 
 export interface Shaper {
+  $key?: string;
+  id?: string;
   first: string
   last: string
   imageFile: string

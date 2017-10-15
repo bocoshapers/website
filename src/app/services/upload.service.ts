@@ -2,7 +2,7 @@
  * Created by githop on 4/8/17.
  */
 
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 import * as firebase from 'firebase/app';
 
 @Injectable()

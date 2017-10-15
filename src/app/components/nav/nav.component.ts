@@ -13,6 +13,7 @@ import {AuthService} from "../../services/auth.service";
         </span>
         <span class="boco-spacer"></span>
         <span><a md-button [routerLink]="'/'">Home</a></span>
+        <span><a md-button routerLink="votes">Votes</a></span>
         <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
         <span><a md-button [routerLink]="'/projects/admin'">Projects Dashboard</a></span>
         <span (click)="logout()"><a md-button>logout</a></span>
