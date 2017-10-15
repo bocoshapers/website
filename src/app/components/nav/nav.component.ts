@@ -7,17 +7,17 @@ import {AuthService} from "../../services/auth.service";
   selector: 'boco-nav',
   template: `
     <div *ngIf="currentUser != null">
-      <md-toolbar color="accent">
+      <mat-toolbar color="accent">
         <span class="nav__profile">
           <img [src]="currentUser.imageFile"/>
         </span>
         <span class="boco-spacer"></span>
-        <span><a md-button [routerLink]="'/'">Home</a></span>
-        <span><a md-button routerLink="votes">Votes</a></span>
-        <span><a md-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
-        <span><a md-button [routerLink]="'/projects/admin'">Projects Dashboard</a></span>
-        <span (click)="logout()"><a md-button>logout</a></span>
-      </md-toolbar>
+        <span><a mat-button [routerLink]="'/'">Home</a></span>
+        <span><a mat-button routerLink="votes">Votes</a></span>
+        <span><a mat-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
+        <span><a mat-button [routerLink]="'/projects/admin'">Projects Dashboard</a></span>
+        <span (click)="logout()"><a mat-button>logout</a></span>
+      </mat-toolbar>
     </div>
   `,
   styles: [

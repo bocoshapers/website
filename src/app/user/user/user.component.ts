@@ -43,81 +43,81 @@ import {Shaper} from "../../components/team/team.service";
   template: `
     <div class="user">
       <div class="user__wrapper" *ngIf="user">
-        <md-card>
-          <md-toolbar color="primary">My Profile
-            <button md-button (click)="editProfile()">edit profile</button>
-          </md-toolbar>
+        <mat-card>
+          <mat-toolbar color="primary">My Profile
+            <button mat-button (click)="editProfile()">edit profile</button>
+          </mat-toolbar>
           <div class="user__profile">
 
             <div class="user__info">
-              <md-card>
-                <md-card-title>My Account</md-card-title>
-                <md-card-subtitle>{{user.first}} {{user.last}}</md-card-subtitle>
-                <md-card-content>
+              <mat-card>
+                <mat-card-title>My Account</mat-card-title>
+                <mat-card-subtitle>{{user.first}} {{user.last}}</mat-card-subtitle>
+                <mat-card-content>
                   {{user.bio}}
-                </md-card-content>
+                </mat-card-content>
 
-                <!--<md-card-actions>-->
-                <!--<button md-button (click)="editProfile()">edit profile</button>-->
-                <!--</md-card-actions>-->
-              </md-card>
+                <!--<mat-card-actions>-->
+                <!--<button mat-button (click)="editProfile()">edit profile</button>-->
+                <!--</mat-card-actions>-->
+              </mat-card>
             </div>
 
             <div class="profile__pic">
-              <md-card>
-                <img md-card-image [src]="user.imageFile"/>
-                <md-card-footer>
+              <mat-card>
+                <img mat-card-image [src]="user.imageFile"/>
+                <mat-card-footer>
                   <h4>Profile Pic</h4>
-                </md-card-footer>
-              </md-card>
+                </mat-card-footer>
+              </mat-card>
             </div>
           </div>
 
-        </md-card>
+        </mat-card>
 
         <boco-modal [trigger]="editingProfile">
-          <md-card>
+          <mat-card>
             <div class="user__profile">
 
               <div class="user__info">
-                <md-card>
-                  <md-card-title>My Account</md-card-title>
+                <mat-card>
+                  <mat-card-title>My Account</mat-card-title>
 
 
-                  <md-card-subtitle>
-                    <md-input-container>
-                      <input mdInput placeholder="First Name" [(ngModel)]="user.first" />
-                    </md-input-container>
+                  <mat-card-subtitle>
+                    <mat-form-field>
+                      <input matInput placeholder="First Name" [(ngModel)]="user.first" />
+                    </mat-form-field>
 
 
-                    <md-input-container>
-                      <input mdInput placeholder="Last Name" [(ngModel)]="user.last" />
-                    </md-input-container>
-                  </md-card-subtitle>
-                  <md-card-content>
-                    <md-input-container>
-                      <textarea mdInput cols="100" rows="5" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
-                    </md-input-container>
-                  </md-card-content>
-                </md-card>
+                    <mat-form-field>
+                      <input matInput placeholder="Last Name" [(ngModel)]="user.last" />
+                    </mat-form-field>
+                  </mat-card-subtitle>
+                  <mat-card-content>
+                    <mat-form-field>
+                      <textarea matInput cols="100" rows="5" placeholder="Bio" [(ngModel)]="user.bio"></textarea>
+                    </mat-form-field>
+                  </mat-card-content>
+                </mat-card>
               </div>
 
               <div class="profile__pic">
-                <md-card>
-                  <img md-card-image [src]="user.imageFile"/>
-                  <md-card-content>
+                <mat-card>
+                  <img mat-card-image [src]="user.imageFile"/>
+                  <mat-card-content>
                     <input id="profPic" type="file" (change)="onFileSelect($event)"/>
                     <h5>Upload new profile pic</h5>
-                  </md-card-content>
-                </md-card>
+                  </mat-card-content>
+                </mat-card>
               </div>
             </div>
 
-            <md-card-actions>
-              <button md-button (click)="save(user)">save</button>
-              <button md-button (click)="editingProfile = false">cancel</button>
-            </md-card-actions>
-          </md-card>
+            <mat-card-actions>
+              <button mat-button (click)="save(user)">save</button>
+              <button mat-button (click)="editingProfile = false">cancel</button>
+            </mat-card-actions>
+          </mat-card>
         </boco-modal>
       </div>
     </div>

@@ -9,19 +9,19 @@ import { Shaper } from '../../components/team/team.service';
   selector: 'boco-voting',
   template: `
     <ng-container *ngIf="topic$ != null">
-      <md-toolbar>
+      <mat-toolbar>
         <h1>{{topic$.name}}</h1>
         <span class="boco-spacer"></span>
-      </md-toolbar>
+      </mat-toolbar>
       <div class="voting-stats">
         <div fxLayout="row" class="voters">
-          <md-chip-list>
-            <md-chip class="voter-chip --primary" *ngFor="let voter of topic$.voters">
+          <mat-chip-list>
+            <mat-chip class="voter-chip --primary" *ngFor="let voter of topic$.voters">
               <img class="voter-img" [src]="voter.imageFile">
               <span class="voter-img__spacer"></span>
               {{voter.first}}
-            </md-chip>
-          </md-chip-list>
+            </mat-chip>
+          </mat-chip-list>
         </div>
         
         <div class="voting-results">
@@ -31,25 +31,25 @@ import { Shaper } from '../../components/team/team.service';
         
         
       </div>
-      <md-card class="voting-card">
-        <md-card-content>
+      <mat-card class="voting-card">
+        <mat-card-content>
           <p>{{topic$.description}}</p>
-        </md-card-content>
+        </mat-card-content>
         <div fxLayout="row" class="voting-card__actions">
           <button
             (click)="submitVote(true)"
-            md-raised-button>
+            mat-raised-button>
             Yay
           </button>
           <button
             (click)="submitVote(false)"
-            md-raised-button
+            mat-raised-button
             color="warn">
             Nay
           </button>
         </div>
         <p *ngIf="yourVote != null">You voted: {{yourVote}}</p>
-      </md-card>
+      </mat-card>
       
     </ng-container>
   `,

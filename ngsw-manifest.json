@@ -1,0 +1,28 @@
+{
+  "external": {
+    "urls": [
+      {"url": "https://fonts.googleapis.com/icon?family=Material+Icons"},
+      {"url": "https://fonts.googleapis.com/css?family=Roboto"}
+    ]
+  },
+  "routing": {
+    "index": "/index.html",
+    "routes": {
+      "/": {
+        "prefix": false
+      },
+      "/login": {
+        "prefix": false
+      },
+      "/users": {
+        "prefix": true
+      },
+      "/projects": {
+        "prefix": true
+      },
+      "/votes": {
+        "prefix": true
+      }
+    }
+  }
+}

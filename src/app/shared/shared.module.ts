@@ -4,30 +4,31 @@ import {CommonModule} from "@angular/common";
 import {ModalComponent} from "./modal/modal.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {
-  MdButtonModule,
-  MdCardModule, MdChipsModule,
-  MdIconModule,
-  MdInputModule,
-  MdListModule,
-  MdSlideToggleModule,
-  MdSnackBarModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  OverlayContainer
+  MatButtonModule,
+  MatCardModule, MatChipsModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatTooltipModule,
 } from '@angular/material';
+
 import { BocoSnackbarComponent } from './boco-snackbar/boco-snackbar.component';
+import {OverlayContainer} from '@angular/cdk/overlay';
 
 let materialModules = [
-  MdButtonModule,
-  MdCardModule,
-  MdInputModule,
-  MdSnackBarModule,
-  MdToolbarModule,
-  MdTooltipModule,
-  MdSlideToggleModule,
-  MdIconModule,
-  MdListModule,
-  MdChipsModule
+  MatButtonModule,
+  MatCardModule,
+  MatInputModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatSlideToggleModule,
+  MatIconModule,
+  MatListModule,
+  MatChipsModule
 ];
 
 @NgModule({
@@ -54,6 +55,6 @@ let materialModules = [
 })
 export class SharedModule {
   constructor(overlayContainer: OverlayContainer) {
-    overlayContainer.themeClass = 'md-boco-theme';
+    overlayContainer.getContainerElement().classList.add('md-boco-theme');
   }
 }

@@ -22,46 +22,46 @@ import {SEvent} from "../events.service";
     <ng-container *ngIf="shaperEvent">
       <ng-container *ngIf="!preview; else previewBlock">
         
-        <md-card class="mat-card-flat">
-          <md-card-header color="accent">
-            <div md-card-avatar class="boco-logo"></div>
-            <md-card-title>{{ name }}</md-card-title>
-            <md-card-subtitle>{{location}} {{ day | date }} {{ from | time }} to {{ to | time }}</md-card-subtitle>
-          </md-card-header>
+        <mat-card class="mat-card-flat">
+          <mat-card-header color="accent">
+            <div mat-card-avatar class="boco-logo"></div>
+            <mat-card-title>{{ name }}</mat-card-title>
+            <mat-card-subtitle>{{location}} {{ day | date }} {{ from | time }} to {{ to | time }}</mat-card-subtitle>
+          </mat-card-header>
           
-          <img md-card-image [src]="photo">
-        </md-card>
+          <img mat-card-image [src]="photo">
+        </mat-card>
         
         <div class="primary-bg" fxLayoutAlign="row" fxLayoutAlign="space-around center" fxLayoutWrap fxLayoutGap="2px">
           <div class="smLink" *ngFor="let smLink of smLinkKeys">
             <a
-              md-raised-button
+              mat-raised-button
               target="_blank"
               rel="noopener noreferrer"
               [href]="smLinks[smLink]">{{smLink}}
-              <md-icon>open_in_new</md-icon>
+              <mat-icon>open_in_new</mat-icon>
             </a>
           </div>
         </div>
         
-        <md-card class="mat-card-flat">
-          <md-card-content>
+        <mat-card class="mat-card-flat">
+          <mat-card-content>
             <span [innerHtml]="description"></span>
-          </md-card-content>
-        </md-card>
+          </mat-card-content>
+        </mat-card>
       </ng-container>
       
       <ng-template #previewBlock>
         
-        <md-card>
-          <md-card-header>
-            <md-card-title><h2>{{name}}</h2></md-card-title>
-          </md-card-header>
-          <img md-card-image [src]="photo">
-          <md-card-actions>
-            <a [routerLink]="['/projects', slug]" md-button color="primary">see more</a>
-          </md-card-actions>
-        </md-card>
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title><h2>{{name}}</h2></mat-card-title>
+          </mat-card-header>
+          <img mat-card-image [src]="photo">
+          <mat-card-actions>
+            <a [routerLink]="['/projects', slug]" mat-button color="primary">see more</a>
+          </mat-card-actions>
+        </mat-card>
         
       </ng-template>
 

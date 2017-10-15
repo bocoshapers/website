@@ -7,62 +7,62 @@ import { ITopic, VotesService } from '../votes.service';
   template: `    
     <div class="boco-votes">
       <div class="add-topic">
-        <button md-button (click)="createTempTopic()">add Topic for vote</button>
+        <button mat-button (click)="createTempTopic()">add Topic for vote</button>
         
         <boco-modal [trigger]="tempTopic != null">
           <ng-container *ngIf="tempTopic != null">
-            <md-toolbar color="primary">
+            <mat-toolbar color="primary">
               {{tempTopic?.name}}
               <span class="boco-spacer"></span>
-              <md-slide-toggle
+              <mat-slide-toggle
                 [color]="'warn'"
                 (change)="tempTopic.anonymous = !tempTopic.anonymous"
                 [checked]="tempTopic.anonymous">
                 Anonymous vote
-              </md-slide-toggle>
-            </md-toolbar>
-            <md-card>
-              <md-card-title>
+              </mat-slide-toggle>
+            </mat-toolbar>
+            <mat-card>
+              <mat-card-title>
 
-                <md-input-container>
+                <mat-form-field>
                   <input
                     required
-                    mdInput
+                    matInput
                     name="topicName"
                     placeholder="Topic name"
                     [(ngModel)]="tempTopic.name">
-                </md-input-container>
-              </md-card-title>
+                </mat-form-field>
+              </mat-card-title>
 
-              <md-card-content>
-                <md-input-container>
+              <mat-card-content>
+                <mat-form-field>
                 <textarea
-                  mdInput
+                  matInput
                   required
                   name="topicDesc"
                   placeholder="Topic Description"
                   [(ngModel)]="tempTopic.description">
                 </textarea>
-                </md-input-container>
-              </md-card-content>
+                </mat-form-field>
+              </mat-card-content>
 
-              <md-card-actions>
-                <button md-button color="warn" (click)="tempTopic = null;">cancel</button>
-                <button md-button (click)="saveTempTopic(tempTopic)">save</button>
-              </md-card-actions>
-            </md-card>
+              <mat-card-actions>
+                <button mat-button color="warn" (click)="tempTopic = null;">cancel</button>
+                <button mat-button (click)="saveTempTopic(tempTopic)">save</button>
+              </mat-card-actions>
+            </mat-card>
           </ng-container>
         </boco-modal>
       </div>
       
       <div class="past-topics">
-        <md-list>
-          <h3 md-subheader>Previous Votes</h3>
-          <md-list-item *ngFor="let topic of topics$ | async">
-            <h5 md-line>{{ topic.name }}</h5>
-            <a md-button [routerLink]="['/votes', topic.$key]">Vote</a>
-          </md-list-item>
-        </md-list>
+        <mat-list>
+          <h3 matSubheader>Previous Votes</h3>
+          <mat-list-item *ngFor="let topic of topics$ | async">
+            <h5 matLine>{{ topic.name }}</h5>
+            <a mat-button [routerLink]="['/votes', topic.$key]">Vote</a>
+          </mat-list-item>
+        </mat-list>
       </div>
     </div>
   `,

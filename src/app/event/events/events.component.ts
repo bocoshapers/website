@@ -10,9 +10,9 @@ import { Observable } from "rxjs";
     }
   `],
   template: `
-    <md-toolbar color="primary">
+    <mat-toolbar color="primary">
       <h5>Boulder Global Shaper Events</h5>
-    </md-toolbar>
+    </mat-toolbar>
     <div fxLayout="row" fxLayoutAlign="center">
       <div fxFlex="95" fxFlex.gt-md="66" *ngFor="let event of $publishedEvents | async" class="events">
         
