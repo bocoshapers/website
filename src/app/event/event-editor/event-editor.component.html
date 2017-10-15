@@ -1,19 +1,19 @@
 <div *ngIf="_event">
-  <md-toolbar color="primary">
+  <mat-toolbar color="primary">
     <h5>{{event?.$key ? 'Edit' : 'Add'}} {{_event.name}}</h5>
     <span class="boco-spacer"></span>
-    <md-slide-toggle
+    <mat-slide-toggle
       [color]="'warn'"
       (change)="_event.published = !_event.published"
       [checked]="_event.published">
       Published
-    </md-slide-toggle>
-  </md-toolbar>
+    </mat-slide-toggle>
+  </mat-toolbar>
   <div fxLayout="row">
     <div fxFlex="{{preview ? '66' : '100'}}">
       <form #eventForm="ngForm">
-        <md-card>
-          <md-card-content>
+        <mat-card>
+          <mat-card-content>
 
             <section fxLayout="row" fxLayoutAlign="center">
                 <div fxFlex>
@@ -85,63 +85,63 @@
 
             <section fxLayout="column" class="md__form--group">
 
-              <md-input-container>
+              <mat-form-field>
                 <input
                   required
-                  mdInput
+                  matInput
                   [(ngModel)]="_event.name"
                   name="eventName"
                   #name="ngModel"
                   placeholder="Event name">
 
-                <md-hint
+                <mat-hint
                   *ngIf="name.errors"
                   class="invalidControl"
                   align="start">Name is required
-                </md-hint>
-              </md-input-container>
+                </mat-hint>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                 <input
                   required
-                  mdInput
+                  matInput
                   [(ngModel)]="slug"
                   name="eventSlug"
                   #slugErr="ngModel"
                   placeholder="Event Slug">
 
-                <md-hint *ngIf="!slugErr.errors">
+                <mat-hint *ngIf="!slugErr.errors">
                   {{slug | slugify}}
-                </md-hint>
+                </mat-hint>
 
-                <md-hint
+                <mat-hint
                   *ngIf="slugErr.errors"
                   class="invalidControl"
                   align="start">
                   Path slug is required
-                </md-hint>
-              </md-input-container>
+                </mat-hint>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                 <input
-                  mdInput
+                  matInput
                   required
                   [(ngModel)]="_event.location"
                   placeholder="Event Location"
                   #location="ngModel"
                   name="eventLocation">
 
-                <md-hint
+                <mat-hint
                   *ngIf="location.errors"
                   class="invalidControl"
                   align="start">
                   Location is required
-                </md-hint>
-              </md-input-container>
+                </mat-hint>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                 <input
-                  mdInput
+                  matInput
                   required
                   [(ngModel)]="_event.smLinks.facebook"
                   placeholder="Facebook link"
@@ -149,56 +149,56 @@
                   #fbUrl="ngModel"
                   type="url">
 
-                <md-hint
+                <mat-hint
                   *ngIf="fbUrl.errors"
                   class="invalidControl"
                   align="start">
                   Facebook url is required.
-                </md-hint>
+                </mat-hint>
 
-              </md-input-container>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                 <input
                   required
-                  mdInput
+                  matInput
                   [(ngModel)]="_event.smLinks.twitter"
                   placeholder="twitter link"
                   name="smLinkTwitter"
                   #twitterUrl="ngModel"
                   type="url">
 
-                <md-hint
+                <mat-hint
                   *ngIf="twitterUrl.errors"
                   class="invalidControl"
                   align="start">
                   twitter url is required.
-                </md-hint>
+                </mat-hint>
 
-              </md-input-container>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                 <input
                   required
-                  mdInput
+                  matInput
                   [(ngModel)]="_event.smLinks.Eventbrite"
                   placeholder="EventBrite link"
                   name="smLinkEventBrite"
                   #ebUrl="ngModel"
                   type="url">
 
-                <md-hint
+                <mat-hint
                   *ngIf="ebUrl.errors"
                   class="invalidControl"
                   align="start">
                   EventBrite is required.
-                </md-hint>
+                </mat-hint>
 
-              </md-input-container>
+              </mat-form-field>
 
-              <md-input-container>
+              <mat-form-field>
                       <textarea
-                        mdInput
+                        matInput
                         required
                         [(ngModel)]="_event.description"
                         name="evetnDescription"
@@ -206,27 +206,27 @@
                         placeholder="Event Description">
                       </textarea>
 
-                <md-hint
+                <mat-hint
                   *ngIf="description.errors"
                   class="invalidControl"
                   align="start">
                   Description is required
-                </md-hint>
-              </md-input-container>
+                </mat-hint>
+              </mat-form-field>
             </section>
 
-          </md-card-content>
-          <md-card-actions>
-            <button type="submit" md-button
+          </mat-card-content>
+          <mat-card-actions>
+            <button type="submit" mat-button
                     (click)="onSave(_event)"
                     [disabled]="!eventForm.form.valid || !_event?.photo">save event
             </button>
             <ng-container *ngIf="preview">
-              <button md-button (click)="onCancel()">cancel</button>
-              <a md-button [routerLink]="'/projects/admin'">back</a>
+              <button mat-button (click)="onCancel()">cancel</button>
+              <a mat-button [routerLink]="'/projects/admin'">back</a>
             </ng-container>
-          </md-card-actions>
-        </md-card>
+          </mat-card-actions>
+        </mat-card>
       </form>
     </div>
 

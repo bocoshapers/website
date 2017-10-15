@@ -14,18 +14,18 @@ import { FirebaseListObservable } from 'angularfire2/database';
     }
   `],
   template: `
-    <md-toolbar color="primary">
+    <mat-toolbar color="primary">
       <h3>Events Admin</h3>
-    </md-toolbar>
+    </mat-toolbar>
     <div>
 
       <div class="addEvent__button">
         <button
-          md-fab
+          mat-fab
           (click)="addTempEvent()"
-          md-tooltip="Add Event!"
-          [mdTooltipPosition]="'above'">
-          <md-icon>note_add</md-icon>
+          matTooltip="Add Event!"
+          [matTooltipPosition]="'above'">
+          <mat-icon>note_add</mat-icon>
         </button>
       </div>
 
@@ -36,24 +36,24 @@ import { FirebaseListObservable } from 'angularfire2/database';
           [event]="newEvent">
         </boco-event-editor>
 
-        <button md-button (click)="newEvent = null">cancel</button>
+        <button mat-button (click)="newEvent = null">cancel</button>
       </boco-modal>
 
-      <md-list>
-        <h3 md-subheader><a [routerLink]="'/projects'" md-button>Events page</a></h3>
+      <mat-list>
+        <h3 matSubheader><a [routerLink]="'/projects'" mat-button>Events page</a></h3>
 
-        <md-list-item *ngFor="let event of $events | async">
-          <md-icon md-list-icon><a [routerLink]="['/projects', event.slug]">link</a></md-icon>
-          <h5 md-line>{{ event.name }}</h5>
-          <h3 md-line>{{ event.when.date | date:'yMd' }} {{ event.when.from | time }} to {{ event.when.to | time }}</h3>
-          <a [routerLink]="['/projects', event.$key, 'edit']" md-button>
-            <md-icon>mode_edit</md-icon>
+        <mat-list-item *ngFor="let event of $events | async">
+          <mat-icon mat-list-icon><a [routerLink]="['/projects', event.slug]">link</a></mat-icon>
+          <h5 matLine>{{ event.name }}</h5>
+          <h3 matLine>{{ event.when.date | date:'yMd' }} {{ event.when.from | time }} to {{ event.when.to | time }}</h3>
+          <a [routerLink]="['/projects', event.$key, 'edit']" mat-button>
+            <mat-icon>mode_edit</mat-icon>
           </a>
-          <button md-button color="warn" (click)="deleteEvent(event.$key)">
-            <md-icon>delete_forever</md-icon>
+          <button mat-button color="warn" (click)="deleteEvent(event.$key)">
+            <mat-icon>delete_forever</mat-icon>
           </button>
-        </md-list-item>
-      </md-list>
+        </mat-list-item>
+      </mat-list>
     </div>
   `
 })

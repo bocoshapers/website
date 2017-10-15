@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
-import {MdSnackBar} from "@angular/material";
 import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.component";
-
+import {MatSnackBar} from '@angular/material';
 @Component({
   selector: 'boco-login',
   styles: [`
@@ -14,7 +13,7 @@ import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.co
       text-align: center;
     }
 
-    .shaper__login md-card {
+    .shaper__login mat-card {
       margin: 0 auto;
       max-width: 350px;
     }
@@ -23,23 +22,23 @@ import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.co
     <div class="shaper__login">
       <h1>Login</h1>
 
-      <md-card>
+      <mat-card>
 
-        <md-card-actions>
-          <md-input-container>
-            <input mdInput placeholder="Email" [(ngModel)]="email" type="text">
-          </md-input-container>
+        <mat-card-actions>
+          <mat-form-field>
+            <input matInput placeholder="Email" [(ngModel)]="email" type="text">
+          </mat-form-field>
 
 
-          <md-input-container>
-            <input mdInput placeholder="Password" [(ngModel)]="password" type="password">
-          </md-input-container>
+          <mat-form-field>
+            <input matInput placeholder="Password" [(ngModel)]="password" type="password">
+          </mat-form-field>
 
-          <button md-button (click)="login()">login</button>
-        </md-card-actions>
+          <button mat-button (click)="login()">login</button>
+        </mat-card-actions>
 
-        <img md-card-image src="assets/images/boco-logo.png"/>
-      </md-card>
+        <img mat-card-image src="assets/images/boco-logo.png"/>
+      </mat-card>
     </div>
   `
 })
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit{
   email: string = '';
   password: string = '';
   constructor(
-    public bocoSnackbar: MdSnackBar,
+    public bocoSnackbar: MatSnackBar,
     private auth: AuthService,
     private router: Router) {
   }

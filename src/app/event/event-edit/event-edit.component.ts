@@ -3,7 +3,7 @@ import {ActivatedRoute, Params} from "@angular/router";
 import {EventsService} from "../events.service";
 // import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
-import {MdSnackBar} from "@angular/material";
+import {MatSnackBar} from "@angular/material";
 import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.component";
 import {UpdateEvent} from "../event-editor/event-editor.component";
 
@@ -27,7 +27,7 @@ export class EventEditComponent implements OnInit, OnDestroy {
   public $editEvent;
   private $sub;
   constructor(
-    private bocoSnackbar: MdSnackBar,
+    private bocoSnackbar: MatSnackBar,
     private eventsService: EventsService,
     private route: ActivatedRoute) {
 
