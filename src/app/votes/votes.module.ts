@@ -5,6 +5,7 @@ import { VotesComponent } from './votes/votes.component';
 import { VotesRoutes } from './votes.routes';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { VotingComponent } from './voting/voting.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { FormsModule } from '@angular/forms';
     VotesRoutes
   ],
   providers: [VotesService],
-  declarations: [VotesComponent]
+  declarations: [VotesComponent, VotingComponent]
 })
 export class VotesModule { }

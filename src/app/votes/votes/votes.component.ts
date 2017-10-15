@@ -60,7 +60,7 @@ import { ITopic, VotesService } from '../votes.service';
           <h3 md-subheader>Previous Votes</h3>
           <md-list-item *ngFor="let topic of topics$ | async">
             <h5 md-line>{{ topic.name }}</h5>
-            <button md-button>vote</button>
+            <a md-button [routerLink]="['/votes', topic.$key]">Vote</a>
           </md-list-item>
         </md-list>
       </div>
@@ -68,17 +68,13 @@ import { ITopic, VotesService } from '../votes.service';
   `,
   styles: []
 })
-export class VotesComponent implements OnInit, OnDestroy {
+export class VotesComponent implements OnInit {
   topics$: FirebaseListObservable<ITopic[]>;
   tempTopic: Partial<ITopic>;
   constructor(private votesService: VotesService) {}
 
   ngOnInit() {
     this.topics$ = this.votesService.topics$;
-  }
-
-  ngOnDestroy() {
-    console.log('DESTROY!!!');
   }
 
   createTempTopic() {
@@ -91,7 +87,7 @@ export class VotesComponent implements OnInit, OnDestroy {
 
   saveTempTopic(topic: Partial<ITopic>) {
     this.votesService.addTopic(topic)
-      .then(() => this.tempTopic = null);
+      .subscribe(() => this.tempTopic = null);
   }
 
 

@@ -5,7 +5,7 @@ import {ModalComponent} from "./modal/modal.component";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {
   MdButtonModule,
-  MdCardModule,
+  MdCardModule, MdChipsModule,
   MdIconModule,
   MdInputModule,
   MdListModule,
@@ -14,7 +14,7 @@ import {
   MdToolbarModule,
   MdTooltipModule,
   OverlayContainer
-} from "@angular/material";
+} from '@angular/material';
 import { BocoSnackbarComponent } from './boco-snackbar/boco-snackbar.component';
 
 let materialModules = [
@@ -26,7 +26,8 @@ let materialModules = [
   MdTooltipModule,
   MdSlideToggleModule,
   MdIconModule,
-  MdListModule
+  MdListModule,
+  MdChipsModule
 ];
 
 @NgModule({
