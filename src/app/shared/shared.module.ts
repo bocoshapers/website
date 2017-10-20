@@ -1,14 +1,15 @@
-import {NgModule} from '@angular/core';
-import {ShaperComponent} from "./shaper/shaper.component";
-import {CommonModule} from "@angular/common";
-import {ModalComponent} from "./modal/modal.component";
-import {FlexLayoutModule} from "@angular/flex-layout";
+import { NgModule } from '@angular/core';
+import { ShaperComponent } from './shaper/shaper.component';
+import { CommonModule } from '@angular/common';
+import { ModalComponent } from './modal/modal.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
   MatCardModule, MatChipsModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatSidenavModule,
   MatSlideToggleModule,
   MatSnackBarModule,
   MatToolbarModule,
@@ -16,9 +17,9 @@ import {
 } from '@angular/material';
 
 import { BocoSnackbarComponent } from './boco-snackbar/boco-snackbar.component';
-import {OverlayContainer} from '@angular/cdk/overlay';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
-let materialModules = [
+const materialModules = [
   MatButtonModule,
   MatCardModule,
   MatInputModule,
@@ -28,7 +29,8 @@ let materialModules = [
   MatSlideToggleModule,
   MatIconModule,
   MatListModule,
-  MatChipsModule
+  MatChipsModule,
+  MatSidenavModule
 ];
 
 @NgModule({
