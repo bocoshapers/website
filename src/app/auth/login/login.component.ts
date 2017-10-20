@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import {Router} from "@angular/router";
-import {AuthService} from "../../services/auth.service";
-import {BocoSnackbarComponent} from "../../shared/boco-snackbar/boco-snackbar.component";
-import {MatSnackBar} from '@angular/material';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { BocoSnackbarComponent } from '../../shared/boco-snackbar/boco-snackbar.component';
+import { MatSnackBar } from '@angular/material';
+
 @Component({
   selector: 'boco-login',
   styles: [`
@@ -21,30 +22,48 @@ import {MatSnackBar} from '@angular/material';
   template: `
     <div class="shaper__login">
       <h1>Login</h1>
-
       <mat-card>
-
-        <mat-card-actions>
-          <mat-form-field>
-            <input matInput placeholder="Email" [(ngModel)]="email" type="text">
-          </mat-form-field>
-
-
-          <mat-form-field>
-            <input matInput placeholder="Password" [(ngModel)]="password" type="password">
-          </mat-form-field>
-
-          <button mat-button (click)="login()">login</button>
-        </mat-card-actions>
-
-        <img mat-card-image src="assets/images/boco-logo.png"/>
+        <form (ngSubmit)="login()" #loginForm="ngForm">
+          <mat-card-content>
+            <mat-form-field>
+              <input
+                required
+                matInput
+                name="email"
+                placeholder="Email"
+                [(ngModel)]="email" type="text">
+            </mat-form-field>
+            <mat-form-field>
+              <input
+                required
+                matInput
+                name="password"
+                placeholder="Password"
+                [(ngModel)]="password"
+                [type]="hidePassword ? 'password' : 'text'">
+              <mat-icon
+                matSuffix
+                (click)="hidePassword = !hidePassword">
+                {{ hidePassword ? 'visibility' : 'visibility_off' }}
+              </mat-icon>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-button
+              type="submit"
+              [disabled]="!loginForm.form.valid">Login</button>
+          </mat-card-actions>
+          <img mat-card-lg-image src="assets/images/boco-logo.png"/>
+        </form>
       </mat-card>
     </div>
   `
 })
-export class LoginComponent implements OnInit{
-  email: string = '';
-  password: string = '';
+export class LoginComponent implements OnInit {
+  email = '';
+  password = '';
+  hidePassword = true;
   constructor(
     public bocoSnackbar: MatSnackBar,
     private auth: AuthService,
@@ -69,11 +88,11 @@ export class LoginComponent implements OnInit{
   }
 
   _handleLoginError(e) {
-    let snackBarRef = this.bocoSnackbar.openFromComponent(BocoSnackbarComponent, {
+    const snackBarRef = this.bocoSnackbar.openFromComponent(BocoSnackbarComponent, {
       duration: 3500
     });
     let errorMessage;
-    //sometimes the error message is a string or an object with a message prop.
+    // sometimes the error message is a string or an object with a message prop.
     if (e.message) {
       errorMessage = e.message
     } else {
