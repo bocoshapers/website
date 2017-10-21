@@ -23,6 +23,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { VotesModule } from './votes/votes.module';
+import { SideNavComponent } from './components/side-nav/side-nav.component';
 
 const FIREBASE_CONFIG = environment.production ? FIREBASE_CONF : FIREBASE_DEV_CONFIG;
 
@@ -31,7 +32,8 @@ const FIREBASE_CONFIG = environment.production ? FIREBASE_CONF : FIREBASE_DEV_CO
     AppComponent,
     TeamComponent,
     LandingComponent,
-    NavComponent
+    NavComponent,
+    SideNavComponent
   ],
   imports: [
     BrowserModule,

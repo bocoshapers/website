@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {AuthService} from "./auth.service";
+import { AuthService } from './auth.service';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/filter';
-import {Observable} from "rxjs";
-import {UploadService} from "./upload.service";
+import { Observable } from 'rxjs';
+import { UploadService } from './upload.service';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Injectable()
@@ -17,6 +17,16 @@ export class UserService {
     return this.auth.getAuth
       .filter(auth => auth != null)
       .switchMap((auth) => this.getShaper(auth.uid));
+  }
+
+  getCurrentUserAuthStream() {
+    return this.auth.getAuth
+      .switchMap(authState => {
+        if (authState != null) {
+          return this.getShaper(authState.uid);
+        }
+        return Observable.of(null);
+      })
   }
 
   getShaper(uuid: string) {

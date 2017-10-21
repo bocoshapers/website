@@ -1,8 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { AuthService } from '../../services/auth.service';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { Shaper } from '../team/team.service';
+import { ILink } from '../../app.component';
 
 @Component({
   selector: 'boco-nav',
@@ -13,28 +11,20 @@ import { Shaper } from '../team/team.service';
         <img class="nav__profile" [src]="currentUser.imageFile"/>
         <span class="boco-spacer"></span>
         <div fxShow fxHide.gt-sm>
-          <a routerLink="" mat-icon-button matTooltip="Home">
-            <mat-icon>home</mat-icon>
-          </a>
-          <a routerLink="votes" mat-icon-button matTooltip="Votes">
-            <mat-icon>thumbs_up_down</mat-icon>
-          </a>
-          <a mat-icon-button  [routerLink]="['/users', currentUser.$key]" matTooltip="My Account">
-            <mat-icon>settings</mat-icon>
-          </a>
-          <a mat-icon-button routerLink="/projects/admin" matTooltip="Projects">
-            <mat-icon>dashboard</mat-icon>
-          </a>
-          <a mat-icon-button matTooltip="Logout">
-            <mat-icon (click)="onLogout.emit()">power_settings_new</mat-icon>
-          </a>
+          <span *ngFor="let link of linkData">
+            <a *ngIf="link.name !== 'Logout'" [routerLink]="link.path" mat-icon-button matTooltip="{{link.name}}">
+              <mat-icon>{{link.icon}}</mat-icon>
+            </a>
+            <a *ngIf="link.name === 'Logout'" (click)="onLogout.emit()" mat-icon-button matTooltip="{{link.name}}">
+              <mat-icon>{{link.icon}}</mat-icon>
+            </a>
+          </span>
         </div>
         <div fxHide fxShow.gt-sm>
-          <span><a mat-button [routerLink]="'/'">Home</a></span>
-          <span><a mat-button routerLink="votes">Votes</a></span>
-          <span><a mat-button [routerLink]="['/users', currentUser.$key]">My Account</a></span>
-          <span><a mat-button routerLink="/projects/admin">Projects Dashboard</a></span>
-          <span (click)="onLogout.emit()"><a mat-button>logout</a></span>
+          <span *ngFor="let link of linkData">
+            <a *ngIf="link.name !== 'Login'" mat-button [routerLink]="link.path">{{link.name}}</a>
+            <a *ngIf="link.name === 'Login'" mat-button (click)="onLogout.emit()">{{link.name}}</a>
+          </span>
         </div>
       </mat-toolbar>
     </div>
@@ -47,8 +37,23 @@ import { Shaper } from '../team/team.service';
     `
   ]
 })
-export class NavComponent {
+export class NavComponent implements OnChanges {
+  @Input() currentUser: Shaper | null;
+  @Input() linkData: ILink[];
   @Output() onToggleSidenav = new EventEmitter<void>();
   @Output() onLogout = new EventEmitter<void>();
-  @Input() currentUser: Shaper;
+
+  ngOnChanges(changes) {
+    if (changes.currentUser && changes.currentUser.currentValue) {
+      const currentUser = changes.currentUser.currentValue;
+      if (currentUser && currentUser.$key) {
+        this.linkData = this.linkData.map(link => {
+          if (link.name === 'My Account') {
+            link.path = ['/users', currentUser.$key];
+          }
+          return link;
+        })
+      }
+    }
+  }
 }
