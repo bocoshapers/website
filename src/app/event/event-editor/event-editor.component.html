@@ -16,70 +16,79 @@
           <mat-card-content>
 
             <section fxLayout="row" fxLayoutAlign="center">
-                <div fxFlex>
-                  <div>
-                    <label for="eventImg">{{event?.key ? 'Replace' : 'Upload'}} Image</label>
-                    <input
-                      id="eventImg"
-                      type="file"
-                      name="eventPhoto"
-                      (change)="handleFile($event)">
+              <div fxFlex>
+                <div>
+                  <label for="eventImg">{{event?.key ? 'Replace' : 'Upload'}} Image</label>
+                  <input
+                    id="eventImg"
+                    type="file"
+                    name="eventPhoto"
+                    (change)="handleFile($event)">
 
-                    <div *ngIf="_event.photo == null" class="invalidControl">
-                      <small>Photo is required</small>
-                    </div>
+                  <div *ngIf="_event.photo == null" class="invalidControl">
+                    <small>Photo is required</small>
                   </div>
                 </div>
+              </div>
 
-                <div fxFlex>
-                  <div>
-                    <label for="eventDay">Day</label>
+              <div fxFlex>
+                <div>
+                  <mat-form-field>
                     <input
                       id="eventDay"
                       required
+                      matInput
+                      [matDatepicker]="picker"
                       [(ngModel)]="_event.when.date"
                       name="eventDay"
                       #eventDate="ngModel"
-                      placeholder="Day of event"
-                      type="date">
+                      placeholder="Day of event">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
 
-                    <div *ngIf="eventDate.errors" class="invalidControl">
-                      <small>Date is required</small>
-                    </div>
+
+                  <div *ngIf="eventDate.errors" class="invalidControl">
+                    <small>Date is required</small>
                   </div>
+                </div>
 
-                  <div>
-                    <label for="eventStart">From</label>
+                <div>
+                  <mat-form-field>
                     <input
                       id="eventStart"
                       required
+                      matInput
                       [(ngModel)]="_event.when.from"
                       name="eventStart"
                       #eventStart="ngModel"
                       placeholder="Start time"
                       type="time">
+                  </mat-form-field>
 
-                    <div *ngIf="eventStart.errors" class="invalidControl">
-                      <small>Start time is required</small>
-                    </div>
+                  <div *ngIf="eventStart.errors" class="invalidControl">
+                    <small>Start time is required</small>
                   </div>
+                </div>
 
-                  <div>
-                    <label for="eventEnd">To</label>
+                <div>
+                  <mat-form-field>
                     <input
                       id="eventEnd"
                       required
+                      matInput
                       [(ngModel)]="_event.when.to"
                       name="eventEnd"
                       #eventEnd="ngModel"
                       placeholder="End time"
                       type="time">
+                  </mat-form-field>
 
-                    <div *ngIf="eventEnd.errors" class="invalidControl">
-                      <small>End time is required</small>
-                    </div>
+                  <div *ngIf="eventEnd.errors" class="invalidControl">
+                    <small>End time is required</small>
                   </div>
                 </div>
+              </div>
 
             </section>
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EventsService, SEvent, ITempEvent } from '../events.service';
-import 'rxjs/add/operator/map';
 import { UpdateEvent } from '../event-editor/event-editor.component';
 import { FirebaseListObservable } from 'angularfire2/database';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'boco-admin-events',
@@ -31,6 +31,7 @@ import { FirebaseListObservable } from 'angularfire2/database';
 
       <boco-modal [trigger]="newEvent != null">
         <boco-event-editor
+          class="create-project"
           (save)="onEventSave($event)"
           (cancel)="onEventCancel()"
           [event]="newEvent">

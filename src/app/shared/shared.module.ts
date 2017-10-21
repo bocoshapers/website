@@ -5,10 +5,13 @@ import { ModalComponent } from './modal/modal.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import {
   MatButtonModule,
-  MatCardModule, MatChipsModule,
+  MatCardModule,
+  MatChipsModule,
+  MatDatepickerModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
+  MatNativeDateModule,
   MatSidenavModule,
   MatSlideToggleModule,
   MatSnackBarModule,
@@ -30,6 +33,8 @@ const materialModules = [
   MatIconModule,
   MatListModule,
   MatChipsModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
   MatSidenavModule
 ];
 
