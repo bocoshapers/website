@@ -9,6 +9,7 @@ import { Component } from '@angular/core';
   styles: [`
     .snackbar__wrapper {
       color: white;
+      text-align: center;
     }
   `]
 })

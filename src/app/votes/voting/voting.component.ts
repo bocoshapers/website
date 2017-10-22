@@ -14,7 +14,7 @@ import { Shaper } from '../../components/team/team.service';
         <span class="boco-spacer"></span>
       </mat-toolbar>
       <div class="voting-stats">
-        <div fxLayout="row" class="voters">
+        <div fxLayout="row" fxLayoutAlign="center center" class="voters">
           <mat-chip-list>
             <mat-chip class="voter-chip --primary" *ngFor="let voter of topic$.voters">
               <img class="voter-img" [src]="voter.imageFile">
@@ -24,12 +24,16 @@ import { Shaper } from '../../components/team/team.service';
           </mat-chip-list>
         </div>
         
-        <div class="voting-results">
-          <h1>yays {{yaysCount}}</h1>
-          <h2>nays {{naysCount}}</h2>
+        <div class="voting-results" fxLayout="row" fxLayoutAlign="space-around center">
+          <div>
+            <mat-icon>thumb_up</mat-icon>
+            <h4>{{yaysCount}}</h4>
+          </div>
+          <div>
+            <mat-icon>thumb_down</mat-icon>
+            <h4>{{naysCount}}</h4>
+          </div>
         </div>
-        
-        
       </div>
       <mat-card class="voting-card">
         <mat-card-content>
@@ -38,17 +42,18 @@ import { Shaper } from '../../components/team/team.service';
         <div fxLayout="row" class="voting-card__actions">
           <button
             (click)="submitVote(true)"
-            mat-raised-button>
-            Yay
+            mat-button
+            color="primary">
+              <mat-icon>thumb_up</mat-icon>
           </button>
           <button
             (click)="submitVote(false)"
-            mat-raised-button
+            mat-button
             color="warn">
-            Nay
+            <mat-icon>thumb_down</mat-icon>
           </button>
         </div>
-        <p *ngIf="yourVote != null">You voted: {{yourVote}}</p>
+        <p *ngIf="yourVote != null">You voted: 🎉 {{yourVote}} 🎉</p>
       </mat-card>
       
     </ng-container>
@@ -66,11 +71,13 @@ import { Shaper } from '../../components/team/team.service';
       margin-right: 20px;
     }
     .voting-card {
-      margin: 3rem;
+      text-align: center;
+      margin: 0 auto;
+      width: 80%;
     }
     
     .voting-stats {
-      margin: 3em 0.5em;
+      margin: 0.5em 0.5em;
     }
     
     .voter-chip {
@@ -86,9 +93,29 @@ import { Shaper } from '../../components/team/team.service';
       background-color: #005ea4 !important;;
     }
     
-    
     .voting-card__actions button {
       width: 50%;
+    }
+
+    /* Larger than mobile screen */
+    @media (min-width: 40.0rem) {
+      .voting-card {
+        width: 40%;
+      }
+    }
+
+    /* Larger than tablet screen */
+    @media (min-width: 80.0rem) {
+      .voting-card {
+        width: 33%;
+      }
+    }
+
+    /* Larger than desktop screen */
+    @media (min-width: 120.0rem) {
+      .voting-card {
+        width: 25%;
+      }
     }
   `]
 })
@@ -167,7 +194,7 @@ export class VotingComponent implements OnInit, OnDestroy {
       { yaysCount: 0, naysCount: 0 }
     );
     if (votes[user.id]) {
-      this.yourVote = votes[user.id].vote ? 'Yay!' : 'Nay!';
+      this.yourVote = votes[user.id].vote ? 'Yes!' : 'No!';
     }
     this.yaysCount = result.yaysCount;
     this.naysCount = result.naysCount;

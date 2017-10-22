@@ -1,14 +1,14 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseListObservable } from 'angularfire2/database';
 import { ITopic, VotesService } from '../votes.service';
 
 @Component({
   selector: 'boco-votes',
-  template: `    
+  template: `
     <div class="boco-votes">
       <div class="add-topic">
         <button mat-button (click)="createTempTopic()">add Topic for vote</button>
-        
+
         <boco-modal [trigger]="tempTopic != null">
           <ng-container *ngIf="tempTopic != null">
             <mat-toolbar color="primary">
@@ -54,7 +54,7 @@ import { ITopic, VotesService } from '../votes.service';
           </ng-container>
         </boco-modal>
       </div>
-      
+
       <div class="past-topics">
         <mat-list>
           <h3 matSubheader>Previous Votes</h3>
@@ -71,7 +71,9 @@ import { ITopic, VotesService } from '../votes.service';
 export class VotesComponent implements OnInit {
   topics$: FirebaseListObservable<ITopic[]>;
   tempTopic: Partial<ITopic>;
-  constructor(private votesService: VotesService) {}
+
+  constructor(private votesService: VotesService) {
+  }
 
   ngOnInit() {
     this.topics$ = this.votesService.topics$;
@@ -89,7 +91,4 @@ export class VotesComponent implements OnInit {
     this.votesService.addTopic(topic)
       .subscribe(() => this.tempTopic = null);
   }
-
-
-
 }
