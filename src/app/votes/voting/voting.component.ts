@@ -53,24 +53,6 @@ export class VotingComponent implements OnInit, OnDestroy {
     this.sub$ = topic$.subscribe();
   }
 
-  private _handleResults(user, topic) {
-    this.topic = topic;
-    this.voter$ = user;
-    if (!topic.open) {
-      return Observable.of(this._tabulateResults(topic.votes, user));
-    } else {
-      return this._joinTopic(user, topic)
-        .switchMap(({user, topic}) => this._setupVoters(user, topic))
-        .switchMap(({ user, topic }) => {
-          return this.votesService.votes$.map(votes => {
-            return { user, votes: votes[topic.$key] };
-          })
-        })
-        .map(({ user, votes }) => this._tabulateResults(votes, user));
-
-    }
-  }
-
   ngOnDestroy() {
     this.votesService.leaveTopic(this.topic.$key, this.voter$.$key);
     this.sub$.unsubscribe();
@@ -90,6 +72,24 @@ export class VotingComponent implements OnInit, OnDestroy {
         { votes: this.votes }
         ) as ITopic;
       this.votesService.updateTopic(this.topic.$key, newTopic);
+    }
+  }
+
+  private _handleResults(user, topic) {
+    this.topic = topic;
+    this.voter$ = user;
+    if (!topic.open) {
+      return Observable.of(this._tabulateResults(topic.votes, user));
+    } else {
+      return this._joinTopic(user, topic)
+        .switchMap(({user, topic}) => this._setupVoters(user, topic))
+        .switchMap(({ user, topic }) => {
+          return this.votesService.votes$.map(votes => {
+            return { user, votes: votes[topic.$key] };
+          })
+        })
+        .map(({ user, votes }) => this._tabulateResults(votes, user));
+
     }
   }
 
