@@ -60,15 +60,14 @@ export class VotingComponent implements OnInit, OnDestroy {
       return Observable.of(this._tabulateResults(topic.votes, user));
     } else {
       return this._joinTopic(user, topic)
-        .switchMap(({user, topic}) => {
-          return this._setupVoters(user, topic)
-            .switchMap(({ user, topic }) => {
-              return this.votesService.votes$.map(votes => {
-                return { user, votes: votes[topic.$key] };
-              })
-            })
-            .map(({ user, votes }) => this._tabulateResults(votes, user));
+        .switchMap(({user, topic}) => this._setupVoters(user, topic))
+        .switchMap(({ user, topic }) => {
+          return this.votesService.votes$.map(votes => {
+            return { user, votes: votes[topic.$key] };
+          })
         })
+        .map(({ user, votes }) => this._tabulateResults(votes, user));
+
     }
   }
 
