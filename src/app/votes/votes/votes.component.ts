@@ -55,12 +55,22 @@ import { ITopic, VotesService } from '../votes.service';
         </boco-modal>
       </div>
 
+      <div class="open-topics">
+        <mat-list>
+          <h3 matSubheader>Open Votes</h3>
+          <mat-list-item *ngFor="let topic of openVotes">
+            <h5 matLine>{{ topic.name }}</h5>
+            <a mat-button [routerLink]="['/votes', topic.$key]">Vote</a>
+          </mat-list-item>
+        </mat-list>
+      </div>
+      
       <div class="past-topics">
         <mat-list>
           <h3 matSubheader>Previous Votes</h3>
-          <mat-list-item *ngFor="let topic of topics$ | async">
+          <mat-list-item *ngFor="let topic of results">
             <h5 matLine>{{ topic.name }}</h5>
-            <a mat-button [routerLink]="['/votes', topic.$key]">Vote</a>
+            <a mat-button [routerLink]="['/votes', topic.$key]">See Results</a>
           </mat-list-item>
         </mat-list>
       </div>
@@ -70,6 +80,8 @@ import { ITopic, VotesService } from '../votes.service';
 })
 export class VotesComponent implements OnInit {
   topics$: FirebaseListObservable<ITopic[]>;
+  openVotes: ITopic[];
+  results: ITopic[];
   tempTopic: Partial<ITopic>;
 
   constructor(private votesService: VotesService) {
@@ -77,13 +89,30 @@ export class VotesComponent implements OnInit {
 
   ngOnInit() {
     this.topics$ = this.votesService.topics$;
+
+    this.topics$
+      .map(topics => {
+        return topics.reduce(
+          (ui, topic) => {
+            topic.open ? ui.open.push(topic) : ui.closed.push(topic);
+            return ui;
+          },
+          { open: [], closed: [] }
+        );
+      })
+      .map(({open, closed}) => {
+        this.openVotes = open;
+        this.results = closed;
+      })
+      .subscribe();
   }
 
   createTempTopic() {
     this.tempTopic = {
       name: '',
       description: '',
-      anonymous: false
+      anonymous: false,
+      open: true
     };
   }
 

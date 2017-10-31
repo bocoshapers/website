@@ -2,8 +2,8 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {UserService} from '../../services/user.service';
 import {ITopic, VotesService} from '../votes.service';
-import contains from 'ramda/src/contains';
 import { Shaper } from '../../components/team/team.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'boco-voting',
@@ -12,11 +12,18 @@ import { Shaper } from '../../components/team/team.service';
       <mat-toolbar>
         <h1>{{topic$.name}}</h1>
         <span class="boco-spacer"></span>
+        <button
+          mat-button
+          (click)="closeVote()"
+          *ngIf="canCloseVote">
+          close vote
+        </button>
+        <p *ngIf="!topic$.open">voted on: {{topic$.votedOn | date}}</p>
       </mat-toolbar>
       <div class="voting-stats">
         <div fxLayout="row" fxLayoutAlign="center center" class="voters">
-          <mat-chip-list>
-            <mat-chip class="voter-chip --primary" *ngFor="let voter of topic$.voters">
+          <mat-chip-list *ngIf="voters$ != null && topic$.open">
+            <mat-chip class="voter-chip --primary" *ngFor="let voter of voters$">
               <img class="voter-img" [src]="voter.imageFile">
               <span class="voter-img__spacer"></span>
               {{voter.first}}
@@ -24,16 +31,20 @@ import { Shaper } from '../../components/team/team.service';
           </mat-chip-list>
         </div>
         
-        <div class="voting-results" fxLayout="row" fxLayoutAlign="space-around center">
-          <div>
-            <mat-icon>thumb_up</mat-icon>
-            <h4>{{yaysCount}}</h4>
+        <div class="voting-results">
+          <div fxLayout="row" fxLayoutAlign="space-around center">
+            <div>
+              <mat-icon>thumb_up</mat-icon>
+              <h4>{{yaysCount}}</h4>
+            </div>
+            <div>
+              <mat-icon>thumb_down</mat-icon>
+              <h4>{{naysCount}}</h4>
+            </div>
           </div>
-          <div>
-            <mat-icon>thumb_down</mat-icon>
-            <h4>{{naysCount}}</h4>
-          </div>
+          <h4 *ngIf="!topic$.open">{{result}}</h4>
         </div>
+        
       </div>
       <mat-card class="voting-card">
         <mat-card-content>
@@ -41,12 +52,14 @@ import { Shaper } from '../../components/team/team.service';
         </mat-card-content>
         <div fxLayout="row" class="voting-card__actions">
           <button
+            [disabled]="!topic$.open"
             (click)="submitVote(true)"
             mat-button
             color="primary">
               <mat-icon>thumb_up</mat-icon>
           </button>
           <button
+            [disabled]="!topic$.open"
             (click)="submitVote(false)"
             mat-button
             color="warn">
@@ -93,6 +106,10 @@ import { Shaper } from '../../components/team/team.service';
       background-color: #005ea4 !important;;
     }
     
+    .voting-results {
+      text-align: center;
+    }
+    
     .voting-card__actions button {
       width: 50%;
     }
@@ -122,14 +139,25 @@ import { Shaper } from '../../components/team/team.service';
 export class VotingComponent implements OnInit, OnDestroy {
   topic$: ITopic;
   voter$: Shaper;
-  votes$;
+  voters$: Shaper[];
   sub$;
   yaysCount: number = 0;
   naysCount: number = 0;
   yourVote: string;
+  result: string;
   constructor(private route: ActivatedRoute,
               private userService: UserService,
-              private votesService: VotesService) { }
+              private votesService: VotesService) {
+
+  }
+
+  get isTopicOwner() {
+    return (this.topic$ != null && this.voter$ != null && this.topic$.ownerId === this.voter$.$key);
+  }
+
+  get canCloseVote() {
+    return this.isTopicOwner && this.topic$.open
+  }
 
   ngOnInit() {
     const topic$ = this.route.params
@@ -138,7 +166,8 @@ export class VotingComponent implements OnInit, OnDestroy {
         return this.userService.getCurrentUser()
           .map((user) => ({ user, topic }))
       })
-      .map(({ user, topic }) => this._setupTopic(user, topic))
+      .switchMap(({ user, topic }) => this._joinTopic(user, topic))
+      .switchMap(({ user, topic }) => this._setupVoters(user, topic))
       .switchMap(({ user, topic }) => {
         return this.votesService.votes$.map(votes => ({ user, votes, topic }))
       })
@@ -148,33 +177,47 @@ export class VotingComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    const filteredVoters = this.votesService.removeVoterFromTopic(this.voter$, this.topic$.voters);
-    const newTopic = Object.assign({}, this.topic$, { voters: filteredVoters });
+    this.votesService.leaveTopic(this.topic$.$key, this.voter$.$key);
     this.sub$.unsubscribe();
-    this.votesService.updateTopic(this.topic$.$key, newTopic)
-      .then(() => void 0);
   }
 
   submitVote(vote: boolean) {
-    this.votesService.voteOnTopic(this.topic$.$key, this.voter$.id, vote);
+    this.votesService.voteOnTopic(this.topic$.$key, this.voter$.$key, vote);
   }
 
-  private _setupTopic(user: Shaper, topic: ITopic) {
-    this.topic$ = topic;
-    const _user = Object.assign({}, user, { id: user.$key });
-    this.voter$ = _user;
-    const voters = topic.voters || [];
-    const hasUser = contains(_user, voters);
-    // to handle removing a user on tab close
-    this.votesService.setupDisconnect(topic.$key, _user, voters);
-    if (!hasUser) {
-      const updateTopic = Object.assign({}, topic, { voters: [...voters, _user] });
-      this.votesService.updateTopic(topic.$key, updateTopic)
-        .then(topic => {
-          return { topic, user: _user };
-        })
+  closeVote() {
+    if (this.isTopicOwner) {
+      const newTopic = Object.assign(
+        {},
+        this.topic$,
+        { open: false },
+        { votedOn: Date.now() }
+        ) as ITopic;
+      this.votesService.updateTopic(this.topic$.$key, newTopic);
     }
-    return { user: _user, topic };
+  }
+
+  private _joinTopic(user: Shaper, topic: ITopic) {
+    this.topic$ = topic;
+    if (!topic.open) {
+      return Observable.of({ topic, user });
+    }
+    return this.votesService.joinTopic(topic.$key, user.$key, user)
+      .then(() => ({ user, topic }))
+      .catch(() => console.log('error joining topic'));
+  }
+
+  private _setupVoters(user: Shaper, topic: ITopic) {
+    this.voter$ = user;
+
+    if (!topic.open) {
+      return Observable.of({ topic, user });
+    }
+
+    return this.votesService.getVotersForTopic(topic.$key).map(voters => {
+      this.voters$ = Object.keys(voters).map(key => voters[key]);
+      return { user, topic };
+    });
   }
 
   private _tabulateResults(vote, user, topic) {
@@ -182,7 +225,7 @@ export class VotingComponent implements OnInit, OnDestroy {
     if (votes == null) {
       return;
     }
-    const result = Object.keys(votes).reduce(
+    const results = Object.keys(votes).reduce(
       (count, key) => {
         if (votes[key].vote) {
           count.yaysCount += 1;
@@ -193,11 +236,21 @@ export class VotingComponent implements OnInit, OnDestroy {
       },
       { yaysCount: 0, naysCount: 0 }
     );
-    if (votes[user.id]) {
-      this.yourVote = votes[user.id].vote ? 'Yes!' : 'No!';
+    if (votes[user.$key]) {
+      this.yourVote = votes[user.$key].vote ? 'Yes!' : 'No!';
     }
-    this.yaysCount = result.yaysCount;
-    this.naysCount = result.naysCount;
+    const { yaysCount, naysCount } = results;
+    let result = '';
+    if (yaysCount > naysCount)  {
+      result = 'The Yays have it!'
+    } else if (yaysCount === naysCount) {
+      result = `It's a tie!`;
+    } else {
+      result = 'the Nays have it!';
+    }
+    this.result = result;
+    this.yaysCount = yaysCount;
+    this.naysCount = naysCount;
   }
 
 }
