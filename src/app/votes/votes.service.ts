@@ -22,7 +22,7 @@ export interface IVote {
   vote: boolean;
 }
 
-interface IVoteStore {
+export interface IVoteStore {
   [topicId: string]: {
     [voterId: string]: {
       shaperId: string;
@@ -61,8 +61,7 @@ export class VotesService {
   joinTopic(topicKey, voterKey, voter) {
     this.setupDisconnect(topicKey, voterKey);
     return this.db.object(`/votes/voters/${topicKey}/${voterKey}`)
-      .set(voter)
-      .then((voterRef) => voterRef);
+      .set(voter);
   }
 
   leaveTopic(topicKey, voterKey) {
