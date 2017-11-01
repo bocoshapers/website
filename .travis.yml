@@ -1,24 +1,19 @@
 language: node_js
 node_js:
-  - "8"
-
+- '8'
 branches:
   only:
-    - master
-
+  - master
 before_script:
-  - npm install -g firebase-tools
-  - npm install -g @angular/cli@1.4.5
-  - echo "export const FIREBASE_PROD = '$FIREBASE_PROD'; export const FIREBASE_DEV = '$FIREBASE_DEV';" > src/environments/firebase.keys.ts
-  - cd functions && npm install && cd ..
-
+- npm install -g firebase-tools
+- npm install -g @angular/cli@1.4.5
+- echo "export const FIREBASE_PROD = '$FIREBASE_PROD'; export const FIREBASE_DEV =
+  '$FIREBASE_DEV';" > src/environments/firebase.keys.ts
+- cd functions && npm install && cd ..
 script:
-  - ng build --prod --aot --base-href "https://bocoshapers.com/"
-
+- ng build --prod --aot --base-href "https://bocoshapers.com/"
 after_success:
-  - firebase deploy --token $FIREBASE_TOKEN
-
+- firebase deploy --token $FIREBASE_TOKEN
 notifications:
-  slack: globalshapersboulder:u1lrKfYPPMF2aOmHspVYgDHt
-  
-    
+  slack:
+    secure: BPLbxB/poLi4gbfQf1uadRTzS45Uew9kwF0lLc9mk/0oJUpR+pM0GwriW2aLa/b5GKTNfXRG8J9gv3T7JeMH4R19DT2Pfjcx9P19qPkBWhhjpIq0bYTjLVJLRnEXXH5uHEoT7+0HAb24eY89UEnvA5Gx22ilfbeIY07+cWM05yNfkOvke5Nz43e066cD/85gtJsbJwW6ndTlBuCNTnUoK6ho2hizp+WRWP4L2G5Ebm+8XOcmkdpDkO2ms9rYv4rWiQ7VdxbekweITrZdJn40eMiz2enq/C2Nz3gLRwCyQyxhW52K00aojMr+2S8KN/oCCGMs/WwrqZaGENpXan2veIUimuKRbFl+6sEBjA43p+HX4OQqg5Tf8V8SfC7gdGrLJ9hZzOgC6TVXjxO+BjocnOpzcl+eHWiqKJKqedtfKEyUUEWh0CmKOh1GVlrK0z/D7gS6y7NkFuDQ+1Tk0IeFd5p1jW3HZ1JjO3uzIBh8F/ePKcZ+ZwTPicabzXuyhd8pc/IqQJ5CNy7Ee9EvXEm4+S6MR6954pOEHXRaY80R9pvRfZW2ftpJu7Zaqku89nVGkpvBMpKK/ru6vviUdXQDM65sVlJSZwT6WAmBFOgfo3kr7KkSC1Xeh2boXo1affnQFxcE8tu2RXwBoIoimnMh6dJcH0fhlMJFLqux60di+vA=
